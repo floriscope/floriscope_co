@@ -1,0 +1,27 @@
+/* App Color Palette
+Green #14B9AB ; 
+Gray #616261 ; 
+Yellow #FECF5B ; 
+Light Gray #DFD7D8 ; 
+Secondary #7DCCDF ; 
+Orange #F17959 ;  */
+
+/* #root {
+  display: grid;
+  border-style: solid;
+  border-color: red;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-gap: 10px;
+  width: 100vw;
+  height: 100vh;
+} */
+
+.App {
+  text-align: center;
+  background-color: #dfd7d8;
+}
+
+.Home {
+  background-color: #dfd7d8;
+}

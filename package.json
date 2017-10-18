@@ -1,0 +1,40 @@
+{
+  "name": "floriscope",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "grid-styled": "^2.0.0-11",
+    "history": "^4.7.2",
+    "localforage": "^1.5.2",
+    "react": "^16.0.0",
+    "react-css-grid": "^2.0.0-0",
+    "react-dom": "^16.0.0",
+    "react-headroom": "^2.2.1",
+    "react-redux": "^5.0.6",
+    "react-responsive": "^2.0.0",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^5.0.0-alpha.6",
+    "react-scripts": "1.0.14",
+    "redux": "^3.7.2",
+    "redux-form": "^7.1.0",
+    "redux-persist": "^4.10.1",
+    "redux-thunk": "^2.2.0",
+    "seamless-immutable": "^7.1.2",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.74.2",
+    "semantic-ui-redux-form-fields": "^1.0.0",
+    "serve": "^6.2.0",
+    "styled-components": "^2.2.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "now-start": "cd build && serve -s ./",
+    "deploy": "cd build && now --name vegebase-admin"
+  },
+  "devDependencies": {
+    "redux-logger": "^3.0.6"
+  }
+}
