@@ -6,22 +6,225 @@ Light Gray #DFD7D8 ;
 Secondary #7DCCDF ; 
 Orange #F17959 ;  */
 
-/* #root {
-  display: grid;
-  border-style: solid;
-  border-color: red;
-  grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: repeat(1, 1fr);
-  grid-gap: 10px;
-  width: 100vw;
-  height: 100vh;
-} */
+/* PROXIMA NOVA FONT_FACE */
+/* BRANDON GROTESQUE FONT_FACE */
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("../fonts/ProximaNova-Light.eot");
+  src: url("../fonts/ProximaNova-Light.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/ProximaNova-Light.woff2") format("woff2"),
+    url("../fonts/ProximaNova-Light.woff") format("woff"),
+    url("../fonts/ProximaNova-Light.ttf") format("truetype"),
+    url("../fonts/ProximaNova-Light.svg#ProximaNova-Light") format("svg");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("../fonts/ProximaNova-LightIt.eot");
+  src: url("../fonts/ProximaNova-LightIt.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/ProximaNova-LightIt.woff2") format("woff2"),
+    url("../fonts/ProximaNova-LightIt.woff") format("woff"),
+    url("../fonts/ProximaNova-LightIt.ttf") format("truetype"),
+    url("../fonts/ProximaNova-LightIt.svg#ProximaNova-LightIt") format("svg");
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* BRANDON GROTESQUE FONT_FACE */
+@font-face {
+  font-family: "Brandon Grotesque";
+  src: url("../fonts/BrandonGrotesque-Black.eot");
+  src: url("../fonts/BrandonGrotesque-Black.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/BrandonGrotesque-Black.woff2") format("woff2"),
+    url("../fonts/BrandonGrotesque-Black.woff") format("woff"),
+    url("../fonts/BrandonGrotesque-Black.ttf") format("truetype"),
+    url("../fonts/BrandonGrotesque-Black.svg#BrandonGrotesque-Black")
+      format("svg");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Brandon Grotesque";
+  src: url("../fonts/BrandonGrotesque-BlackItalic.eot");
+  src: url("../fonts/BrandonGrotesque-BlackItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/BrandonGrotesque-BlackItalic.woff2") format("woff2"),
+    url("../fonts/BrandonGrotesque-BlackItalic.woff") format("woff"),
+    url("../fonts/BrandonGrotesque-BlackItalic.ttf") format("truetype"),
+    url("../fonts/BrandonGrotesque-BlackItalic.svg#BrandonGrotesque-BlackItalic")
+      format("svg");
+  font-weight: 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Brandon Grotesque";
+  src: url("../fonts/BrandonGrotesque-Thin.eot");
+  src: url("../fonts/BrandonGrotesque-Thin.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/BrandonGrotesque-Thin.woff2") format("woff2"),
+    url("../fonts/BrandonGrotesque-Thin.woff") format("woff"),
+    url("../fonts/BrandonGrotesque-Thin.ttf") format("truetype"),
+    url("../fonts/BrandonGrotesque-Thin.svg#BrandonGrotesque-Thin")
+      format("svg");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Brandon Grotesque";
+  src: url("../fonts/BrandonGrotesque-Light.eot");
+  src: url("../fonts/BrandonGrotesque-Light.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/BrandonGrotesque-Light.woff2") format("woff2"),
+    url("../fonts/BrandonGrotesque-Light.woff") format("woff"),
+    url("../fonts/BrandonGrotesque-Light.ttf") format("truetype"),
+    url("../fonts/BrandonGrotesque-Light.svg#BrandonGrotesque-Light")
+      format("svg");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Brandon Grotesque";
+  src: url("../fonts/BrandonGrotesque-LightItalic.eot");
+  src: url("../fonts/BrandonGrotesque-LightItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/BrandonGrotesque-LightItalic.woff2") format("woff2"),
+    url("../fonts/BrandonGrotesque-LightItalic.woff") format("woff"),
+    url("../fonts/BrandonGrotesque-LightItalic.ttf") format("truetype"),
+    url("../fonts/BrandonGrotesque-LightItalic.svg#BrandonGrotesque-LightItalic")
+      format("svg");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Brandon Grotesque";
+  src: url("../fonts/BrandonGrotesque-ThinItalic.eot");
+  src: url("../fonts/BrandonGrotesque-ThinItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/BrandonGrotesque-ThinItalic.woff2") format("woff2"),
+    url("../fonts/BrandonGrotesque-ThinItalic.woff") format("woff"),
+    url("../fonts/BrandonGrotesque-ThinItalic.ttf") format("truetype"),
+    url("../fonts/BrandonGrotesque-ThinItalic.svg#BrandonGrotesque-ThinItalic")
+      format("svg");
+  font-weight: 100;
+  font-style: italic;
+}
+
+/* BRANDON-TEXT FONT-FACE */
+
+@font-face {
+  font-family: "Brandon Text";
+  src: url("../fonts/BrandonText-Light.eot");
+  src: url("../fonts/BrandonText-Light.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/BrandonText-Light.woff2") format("woff2"),
+    url("../fonts/BrandonText-Light.woff") format("woff"),
+    url("../fonts/BrandonText-Light.ttf") format("truetype"),
+    url("../fonts/BrandonText-Light.svg#BrandonText-Light") format("svg");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Brandon Text";
+  src: url("../fonts/BrandonText-LightItalic.eot");
+  src: url("../fonts/BrandonText-LightItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/BrandonText-LightItalic.woff2") format("woff2"),
+    url("../fonts/BrandonText-LightItalic.woff") format("woff"),
+    url("../fonts/BrandonText-LightItalic.ttf") format("truetype"),
+    url("../fonts/BrandonText-LightItalic.svg#BrandonText-LightItalic")
+      format("svg");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Brandon Text";
+  src: url("../fonts/BrandonText-Regular.eot");
+  src: url("../fonts/BrandonText-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/BrandonText-Regular.woff2") format("woff2"),
+    url("../fonts/BrandonText-Regular.woff") format("woff"),
+    url("../fonts/BrandonText-Regular.ttf") format("truetype"),
+    url("../fonts/BrandonText-Regular.svg#BrandonText-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Brandon Text";
+  src: url("../fonts/BrandonText-Thin.eot");
+  src: url("../fonts/BrandonText-Thin.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/BrandonText-Thin.woff2") format("woff2"),
+    url("../fonts/BrandonText-Thin.woff") format("woff"),
+    url("../fonts/BrandonText-Thin.ttf") format("truetype"),
+    url("../fonts/BrandonText-Thin.svg#BrandonText-Thin") format("svg");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Brandon Text";
+  src: url("../fonts/BrandonText-RegularItalic.eot");
+  src: url("../fonts/BrandonText-RegularItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/BrandonText-RegularItalic.woff2") format("woff2"),
+    url("../fonts/BrandonText-RegularItalic.woff") format("woff"),
+    url("../fonts/BrandonText-RegularItalic.ttf") format("truetype"),
+    url("../fonts/BrandonText-RegularItalic.svg#BrandonText-RegularItalic")
+      format("svg");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Brandon Text";
+  src: url("../fonts/BrandonText-ThinItalic.eot");
+  src: url("../fonts/BrandonText-ThinItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/BrandonText-ThinItalic.woff2") format("woff2"),
+    url("../fonts/BrandonText-ThinItalic.woff") format("woff"),
+    url("../fonts/BrandonText-ThinItalic.ttf") format("truetype"),
+    url("../fonts/BrandonText-ThinItalic.svg#BrandonText-ThinItalic")
+      format("svg");
+  font-weight: 100;
+  font-style: italic;
+}
+
+/* AUTHENIA FONT_FACE */
+@font-face {
+  font-family: "Authenia";
+  src: url("../fonts/Authenia-Regular.eot");
+  src: url("../fonts/Authenia-Regular.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/Authenia-Regular.woff2") format("woff2"),
+    url("../fonts/Authenia-Regular.woff") format("woff"),
+    url("../fonts/Authenia-Regular.ttf") format("truetype"),
+    url("../fonts/Authenia-Regular.svg#Authenia-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  font: 300 14px "Proxima Nova Lt", sans-serif;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: ;
+}
+
+body {
+  font: 300 14px "Proxima Nova Lt", sans-serif;
+  color: rgba(255, 255, 255, 0.7);
+  background: radial-gradient(#40404b, #111118) rgba(34, 34, 40, 0.94);
+  margin: 0;
+}
 
 .App {
-  text-align: center;
-  background-color: #dfd7d8;
+  min-height: 100vh;
+  max-width: 960px;
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
 }
 
 .Home {
-  background-color: #dfd7d8;
 }
