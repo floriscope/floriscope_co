@@ -206,13 +206,13 @@ Orange #F17959 ;  */
 }
 
 :root {
-  font: 300 14px "Proxima Nova Lt", sans-serif;
+  font: 300 18px "Proxima Nova", sans-serif;
   color: rgba(255, 255, 255, 0.7);
-  line-height: ;
 }
 
 body {
-  font: 300 14px "Proxima Nova Lt", sans-serif;
+  font: 300 14px "Proxima Nova", sans-serif;
+  line-height: 140%;
   color: rgba(255, 255, 255, 0.7);
   background: radial-gradient(#40404b, #111118) rgba(34, 34, 40, 0.94);
   margin: 0;
