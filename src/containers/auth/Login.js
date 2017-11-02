@@ -9,7 +9,6 @@ import { login } from "../../reducers/authReducer";
 const styles = {
   layout: {
     height: "100vh",
-    background: "silver",
     display: "flex",
     alignItems: "center",
     justifyContent: "center"

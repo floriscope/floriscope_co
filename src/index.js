@@ -1,5 +1,5 @@
-import "./assets/styles/index.css";
 import "semantic-ui-css/semantic.min.css";
+import "./assets/styles/index.css";
 
 import { ConnectedRouter, push } from "react-router-redux";
 import store, { history } from "./store";
