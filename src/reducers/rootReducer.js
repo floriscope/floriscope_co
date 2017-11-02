@@ -1,3 +1,4 @@
+import apolloClient from "../apollo";
 import authReducer from "./authReducer";
 import { combineReducers } from "redux";
 import counter from "./counter";
@@ -8,5 +9,6 @@ export default combineReducers({
   routing: routerReducer,
   counter: counter,
   auth: authReducer,
-  form: formReducer
+  form: formReducer,
+  apollo: apolloClient.reducer()
 });
