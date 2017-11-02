@@ -1,6 +1,7 @@
 import { Link, Redirect, Route, Switch, withRouter } from "react-router-dom";
 
 import About from "./containers/About";
+import Authentification from "./containers/Authentification";
 import Collection from "./containers/Collection";
 import Dashboard from "./containers/Dashboard";
 import HeaderBar from "./components/HeaderBar";
@@ -70,6 +71,7 @@ class App extends React.Component {
           {/* <Redirect from="/" to="/dashboard" /> */}
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
+          <Route path="/authentification" component={Authentification} />
           <Route path="/about-us" component={About} />
           <PrivateRoute
             path="/dashboard"
