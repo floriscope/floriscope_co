@@ -34,10 +34,11 @@ const InputWrapper = styled("div")`
   border-radius: 3px;
   border: 1px solid #f1f1f1;
   margin: 10px;
+  padding-left: 40px;
 `;
 const InputLogo = styled("span")`
   height: 40px;
-  position: relative;
+  position: absolute;
   width: 40px;
   padding: 10px;
   color: #171a1f;
@@ -45,12 +46,15 @@ const InputLogo = styled("span")`
 
 const InputArea = styled("input")`
   box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  border-width: 0;
   background: white;
+  padding: 12px;
   position: relative;
+  height: 38px;
   border: 0;
-  padding: 0 14px;
   right: 0;
-  height: 40px;
   font-size: 13px;
   border-radius: 0 2px 2px 0;
   color: rgba(0, 0, 0, 0.87);
@@ -61,14 +65,16 @@ const InputArea = styled("input")`
 
 const CustomInput = props => (
   <InputWrapper>
-    <InputLogo>logo</InputLogo>
-    <InputArea
-      name={props.name}
-      type={props.inputType}
-      value={props.content}
-      onChange={props.controlFunc}
-      placeholder={props.placeholder}
-    />
+    <div style={{ position: "relative", display: "inline" }}>
+      <InputLogo>L</InputLogo>
+      <InputArea
+        name={props.name}
+        type={props.inputType}
+        value={props.content}
+        onChange={props.controlFunc}
+        placeholder={props.placeholder}
+      />
+    </div>
   </InputWrapper>
 );
 
