@@ -48,8 +48,8 @@ export default (state = initialState, action) => {
 export function login(credentials) {
   return async (dispatch, getState) => {
     try {
-      dispatch({ type: "auth/TRY_LOGIN", user });
       const user = await authService.login(credentials);
+      dispatch({ type: "auth/TRY_LOGIN", user });
       dispatch({ type: "auth/LOGIN_IN", user });
       console.log("fetched user", user);
     } catch (error) {

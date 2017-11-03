@@ -10,13 +10,18 @@ import {
 } from "react-instantsearch/dom";
 
 import React from "react";
+import { bindActionCreators } from "redux";
+import { changeSearchState } from "../reducers/searchReducer";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  user: state.auth.user.user
+  searchState: state.search.searchState,
+  indexName: state.search.indexName
 });
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ changeSearchState }, dispatch);
 
 const Hit = ({ hit }) => (
   <div className="hit">
@@ -59,22 +64,9 @@ const Content = () => (
 );
 
 class Search extends React.Component {
-  state = {
-    query: ""
-  };
   componentDidMount() {
-    console.log(this.props);
-    this.setState({
-      query: new URLSearchParams(this.props.location.search).get("q")
-    });
+    console.log("SEARCH props", this.props);
   }
-
-  changeQuery = q => {
-    console.log("changing query");
-    this.setState({ query: q });
-    return this.state.query;
-  };
-
   render() {
     return (
       <div>
@@ -91,10 +83,8 @@ class Search extends React.Component {
           appId="YUJNYEHBTI"
           apiKey="7e8a0d4ae30b28542ada596b547a0dc8"
           indexName="vegebasePlantes"
-          searchState={{
-            query: this.state.query
-          }}
-          onSearchStateChange={value => this.changeQuery(value)}
+          searchState={this.props.searchState}
+          onSearchStateChange={state => this.props.changeSearchState(state)}
         >
           <header>
             <SearchBox
@@ -111,4 +101,4 @@ class Search extends React.Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps, null)(Search));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));

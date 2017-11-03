@@ -4,7 +4,6 @@ import About from "./containers/About";
 import Authentification from "./containers/Authentification";
 import Collection from "./containers/Collection";
 import Dashboard from "./containers/Dashboard";
-import HeaderBar from "./components/HeaderBar";
 import Home from "./containers/Home";
 import Login from "./containers/auth/Login";
 import Media from "./containers/Media";
@@ -14,7 +13,6 @@ import PrivateCollection from "./containers/PrivateCollection";
 import { Provider } from "rebass-emotion";
 import React from "react";
 import Search from "./containers/Search";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
@@ -22,7 +20,7 @@ const mapStateToProps = state => ({
 });
 
 const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
-  const { authStatus } = rest;
+  // const { authStatus } = rest;
   return (
     <Route
       {...rest}
@@ -40,8 +38,6 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
     />
   );
 };
-
-const Protected = () => <h1>Protected</h1>;
 
 const Links = () => (
   <nav style={{ margin: 10 }}>
