@@ -1,6 +1,7 @@
 import { Link, Redirect, Route, Switch, withRouter } from "react-router-dom";
 
 import About from "./containers/About";
+import Authentification from "./containers/Authentification";
 import Collection from "./containers/Collection";
 import Dashboard from "./containers/Dashboard";
 import HeaderBar from "./components/HeaderBar";
@@ -10,6 +11,7 @@ import Media from "./containers/Media";
 import NotFound from "./components/NotFound";
 import Plante from "./containers/Plante";
 import PrivateCollection from "./containers/PrivateCollection";
+import { Provider } from "rebass-emotion";
 import React from "react";
 import Search from "./containers/Search";
 import { bindActionCreators } from "redux";
@@ -64,30 +66,37 @@ const Links = () => (
 class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <Links />
-        <Switch>
-          {/* <Redirect from="/" to="/dashboard" /> */}
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/about-us" component={About} />
-          <PrivateRoute
-            path="/dashboard"
-            component={Dashboard}
-            isAuthenticated={this.props.isAuthenticated}
-          />
-          <Route path="/plante/:slug" component={Plante} />
-          <Route path="/collection/:slug" component={Collection} />
-          <PrivateRoute
-            path="/c/:uuid"
-            component={PrivateCollection}
-            isAuthenticated={this.props.isAuthenticated}
-          />
-          <Route path="/m/:uuid" component={Media} />
-          <Route path="/recherche" component={Search} />
-          <Route component={NotFound} />
-        </Switch>
-      </div>
+      <Provider
+        theme={{
+          font: '"Proxima Nova", Helvetica, sans-serif',
+          fontSizes: [12, 16, 24, 36, 48, 72]
+        }}
+      >
+        <div className="App">
+          <Links />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/authentification" component={Authentification} />
+            <Route path="/about-us" component={About} />
+            <PrivateRoute
+              path="/dashboard"
+              component={Dashboard}
+              isAuthenticated={this.props.isAuthenticated}
+            />
+            <Route path="/plante/:slug" component={Plante} />
+            <Route path="/collection/:slug" component={Collection} />
+            <PrivateRoute
+              path="/c/:uuid"
+              component={PrivateCollection}
+              isAuthenticated={this.props.isAuthenticated}
+            />
+            <Route path="/m/:uuid" component={Media} />
+            <Route path="/recherche" component={Search} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </Provider>
     );
   }
 }
