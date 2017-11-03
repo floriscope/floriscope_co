@@ -2,6 +2,9 @@ import { Field, reduxForm } from "redux-form";
 import React, { Component } from "react";
 import styled, { css } from "react-emotion";
 
+import email from "../../assets/images/email.svg";
+import lock from "../../assets/images/lock.svg";
+
 const FormHeader = styled("div")`
   display: block;
   background: #ececec;
@@ -45,6 +48,7 @@ const InputLogo = styled("span")`
 `;
 
 const InputArea = styled("input")`
+  font: 300 16px "Proxima Nova", sans-serif;
   box-sizing: border-box;
   width: 100%;
   padding: 0;
@@ -63,18 +67,28 @@ const InputArea = styled("input")`
   }
 `;
 
-const CustomInput = props => (
+const CustomInput = ({
+  input,
+  placeholder,
+  label,
+  type,
+  logo,
+  meta: { touched, error }
+}) => (
   <InputWrapper>
-    <div style={{ position: "relative", display: "inline" }}>
-      <InputLogo>L</InputLogo>
-      <InputArea
-        name={props.name}
-        type={props.inputType}
-        value={props.content}
-        onChange={props.controlFunc}
-        placeholder={props.placeholder}
+    <span>
+      <img
+        src={logo}
+        alt="email"
+        style={{
+          position: "absolute",
+          fontSize: 12,
+          top: 10,
+          left: 10
+        }}
       />
-    </div>
+    </span>
+    <InputArea {...input} type={type} placeholder={placeholder} />
   </InputWrapper>
 );
 
@@ -93,28 +107,17 @@ let AuthForm = props => {
       <AuthTabs>Auth Tabs</AuthTabs>
       <Field
         name="email"
+        placeholder="Adresse électronique"
         type="email"
-        component={props => (
-          <CustomInput
-            name="email"
-            type="email"
-            placeholder="Adresse électronique"
-            value={{ val: props.value }}
-            onChange={param => props.onChange(param.val)}
-          />
-        )}
+        logo={email}
+        component={CustomInput}
       />
       <Field
         name="password"
+        placeholder="Mot de passe"
         type="password"
-        component={password => (
-          <div>
-            <label>Password</label>
-            <input type="text" {...password} />
-            {password.touched &&
-              password.error && <span className="error">{password.error}</span>}
-          </div>
-        )}
+        logo={lock}
+        component={CustomInput}
       />
       <button type="submit">Submit</button>
     </form>

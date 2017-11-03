@@ -15,9 +15,7 @@ const target = document.querySelector("#root");
 render(
   <ApolloProvider store={store} client={client}>
     <ConnectedRouter history={history}>
-      <div>
-        <App />
-      </div>
+      <App />
     </ConnectedRouter>
   </ApolloProvider>,
   target
