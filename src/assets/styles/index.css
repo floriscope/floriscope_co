@@ -219,11 +219,7 @@ body {
 }
 
 .App {
-  min-height: 100vh;
-  max-width: 730px;
-  width: 100%;
-  position: relative;
-  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .Home {
