@@ -1,3 +1,4 @@
+import { Button, TabItem, Tabs } from "rebass-emotion";
 import { Field, reduxForm } from "redux-form";
 import React, { Component } from "react";
 import styled, { css } from "react-emotion";
@@ -5,30 +6,56 @@ import styled, { css } from "react-emotion";
 import { CustomInput } from "../../components/ui/Form";
 import email from "../../assets/images/email.svg";
 import lock from "../../assets/images/lock.svg";
+import { logo } from "../../assets/images";
 
 const FormHeader = styled("div")`
   display: block;
   background: #ececec;
-  height: 118px;
+  height: 134px;
   text-align: center;
   padding: 12px;
   color: #333;
   & img {
     width: 64px;
     height: 64px;
-    border-radius: 50%;
   }
   & div {
-    color: black;
+    color: #c3c3c3;
+    /* font: normal 36px "Authenia", sans-serif; */
+    font: 900 24px "Brandon Grotesque", sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 24px;
   }
 `;
 
-const AuthTabs = styled("div")`
-  box-shadow: 0 1px 0 0 rgba(92, 102, 111, 0.2);
-  color: black;
-  font-size: 18px;
-  height: 40px;
-  margin-bottom: 10px;
+const AuthButton = styled(Button)`
+  border: 0;
+  padding: 14px;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 70px;
+  overflow: hidden;
+  border-radius: 0 0 5px 5px;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+  color: #fff;
+  letter-spacing: 1px;
+  font-size: 14px;
+  text-transform: uppercase;
+  margin-top: 28px;
+  background-color: #159379;
+`;
+
+const AuthTabs = styled(Tabs)`
+  border-bottom: 1px solid #c3c3c3;
+  margin-bottom: 24px;
+`;
+
+const AuthTabItem = styled(TabItem)`
+  color: #ececec;
+  padding: 12px 24px 12px 24px;
+  margin: 0;
 `;
 
 let AuthForm = props => {
@@ -37,13 +64,13 @@ let AuthForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <FormHeader>
-        <img
-          src="https://vegebase-assets-production.s3.amazonaws.com/avatars/profile/40/avatarpic-1495206608.png"
-          alt="floriscopeLogo"
-        />
+        <img src={logo} alt="floriscopeLogo" />
         <div>Floriscope</div>
       </FormHeader>
-      <AuthTabs>auth-tabs</AuthTabs>
+      <AuthTabs>
+        <AuthTabItem active>Connexion</AuthTabItem>
+        <AuthTabItem>Créer un compte</AuthTabItem>
+      </AuthTabs>
       <Field
         name="email"
         placeholder="Adresse électronique"
@@ -58,7 +85,9 @@ let AuthForm = props => {
         logo={lock}
         component={CustomInput}
       />
-      <button type="submit">Submit</button>
+      <AuthButton type="submit">
+        <div>Connexion</div>
+      </AuthButton>
     </form>
   );
 };

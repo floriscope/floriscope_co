@@ -39,27 +39,31 @@ const InputArea = styled("input")`
   }
 `;
 
-export const CustomInput = ({
-  input,
-  placeholder,
-  label,
-  type,
-  logo,
-  meta: { touched, error }
-}) => (
-  <InputWrapper>
-    <span>
-      <img
-        src={logo}
-        alt="email"
-        style={{
-          position: "absolute",
-          fontSize: 12,
-          top: 10,
-          left: 10
-        }}
-      />
-    </span>
-    <InputArea {...input} type={type} placeholder={placeholder} />
-  </InputWrapper>
-);
+//@refactor: add CSS transition with CSSTranstionGroup or react-motion for input onFocus()
+// see inspiration here: https://stackoverflow.com/questions/34269942/how-to-dynamically-add-class-to-parent-div-of-focused-input-field
+
+export class CustomInput extends React.Component {
+  render() {
+    return (
+      <InputWrapper>
+        <span>
+          <img
+            src={this.props.logo}
+            alt="email"
+            style={{
+              position: "absolute",
+              fontSize: 12,
+              top: 10,
+              left: 10
+            }}
+          />
+        </span>
+        <InputArea
+          {...this.props.input}
+          type={this.props.type}
+          placeholder={this.props.placeholder}
+        />
+      </InputWrapper>
+    );
+  }
+}

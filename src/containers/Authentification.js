@@ -58,12 +58,6 @@ class AuthContainer extends React.Component {
       <main style={styles.layout}>
         <div style={styles.formContainer}>
           <AuthForm onSubmit={this.submit} />
-          <div>
-            <div>
-              You are <b>{this.props.authStatus ? "currently" : "not"}</b>{" "}
-              logged in.
-            </div>
-          </div>
         </div>
       </main>
     );
