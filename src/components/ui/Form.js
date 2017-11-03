@@ -41,6 +41,8 @@ const InputArea = styled("input")`
 
 //@refactor: add CSS transition with CSSTranstionGroup or react-motion for input onFocus()
 // see inspiration here: https://stackoverflow.com/questions/34269942/how-to-dynamically-add-class-to-parent-div-of-focused-input-field
+// Give also a try to styled-system from @jxnblk: https://github.com/jxnblk/styled-system
+// More details here: https://medium.com/@tkh44/emotion-ad1c45c6d28b
 
 export class CustomInput extends React.Component {
   render() {
