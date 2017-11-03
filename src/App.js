@@ -69,7 +69,7 @@ class App extends React.Component {
       <Provider
         theme={{
           font: '"Proxima Nova", Helvetica, sans-serif',
-          fontSizes: [12, 16, 24, 36, 48, 72]
+          fontSizes: [12, 16, 24, 36, 48, 72, 142, 200]
         }}
       >
         <div className="App">
