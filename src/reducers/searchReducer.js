@@ -1,5 +1,6 @@
 const initialState = {
-  searchState: {},
+  searchState: { query: "quercus", page: 1 },
+  new: null,
   indexName: ""
 };
 
@@ -10,8 +11,7 @@ export default (state = initialState, action) => {
     case CHANGE_SEARCH_STATE:
       return {
         ...state,
-        searchState: action.searchState,
-        indexName: action.indexName
+        searchState: action.searchState
       };
 
     case CLEAR_SEARCH_STATE:
@@ -28,8 +28,10 @@ export default (state = initialState, action) => {
 // actionCreators
 
 export const changeSearchState = searchState => dispatch => {
-  dispatch({ type: "search/CHANGE_SEARCH_STATE", searchState });
-  console.log("search/CHANGE_SEARCH_STATE", searchState);
+  dispatch({
+    type: "search/CHANGE_SEARCH_STATE",
+    searchState: searchState
+  });
 };
 
 export const clearSearchState = () => dispatch => {
@@ -38,5 +40,5 @@ export const clearSearchState = () => dispatch => {
   });
 };
 // Actions
-export const CHANGE_SEARCH_STATE = "auth/CHANGE_SEARCH_STATE";
-export const CLEAR_SEARCH_STATE = "auth/CLEAR_SEARCH_STATE";
+export const CHANGE_SEARCH_STATE = "search/CHANGE_SEARCH_STATE";
+export const CLEAR_SEARCH_STATE = "search/CLEAR_SEARCH_STATE";
