@@ -33,6 +33,6 @@ const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
 const store = createStore(rootReducer, initialState, composedEnhancers);
 persistStore(store, {
   storage: localForage,
-  whitelist: ["auth"]
+  whitelist: ["auth", "search"]
 });
 export default store;

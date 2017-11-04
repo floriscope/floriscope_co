@@ -1,7 +1,6 @@
 const initialState = {
-  searchState: { query: "quercus", page: 1 },
-  new: null,
-  indexName: ""
+  searchState: {},
+  indexName: "vegebasePlantes"
 };
 
 // Reducers
@@ -18,7 +17,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         searchState: {},
-        indexName: ""
+        indexName: "vegebasePlantes"
       };
     default:
       return state;
