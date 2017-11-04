@@ -1,5 +1,6 @@
 import "../assets/styles/InstantSearchTheme@4.0.css";
 
+import { BackgroundImage, Card, Subhead, Text } from "rebass-emotion";
 import {
   Highlight,
   Hits,
@@ -88,17 +89,22 @@ const RefinementWrapper = styled("div")`
   background: #c3c3c3;
   padding: 0 12px;
 `;
-
+const HitsContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 const Hit = ({ hit }) => (
-  <div className="hit">
-    <div className="hit-image">
-      <img src={hit.cover_sm} alt={hit.objectID} />
-    </div>
-    <div className="hit-content">
+  <Card width={1} m={24}>
+    <BackgroundImage ratio={1 / 4} src={hit.cover} />
+    <Subhead p={2} f={1}>
       <Highlight attributeName="taxon" hit={hit} />
+    </Subhead>
+    <Text p={2} m={2}>
       <Highlight attributeName="nom" hit={hit} />
-    </div>
-  </div>
+    </Text>
+  </Card>
 );
 
 const Sidebar = () => (
@@ -114,7 +120,9 @@ const Sidebar = () => (
 
 const Content = () => (
   <div className="content">
-    <Hits hitComponent={Hit} />
+    <HitsContainer>
+      <Hits hitComponent={Hit} />
+    </HitsContainer>
     <div className="pagination">
       <Pagination showLast />
     </div>

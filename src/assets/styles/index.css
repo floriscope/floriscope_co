@@ -213,7 +213,7 @@ Orange #F17959 ;  */
 body {
   font: 300 14px "Proxima Nova", sans-serif;
   line-height: 140%;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(0, 0, 0, 0.7);
   background: radial-gradient(#40404b, #111118) rgba(34, 34, 40, 0.94);
   margin: 0;
 }

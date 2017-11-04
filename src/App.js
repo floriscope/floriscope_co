@@ -30,7 +30,7 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
         ) : (
           <Redirect
             to={{
-              pathname: "/login",
+              pathname: "/authentification",
               state: { from: props.location }
             }}
           />
@@ -39,23 +39,26 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
   );
 };
 
-const Links = () => (
+const Links = ({ isAuthenticated }) => (
   <nav style={{ margin: 10 }}>
     <Link to="/" style={{ margin: 10 }}>
       Home
     </Link>
-    <Link to="/dashboard" style={{ margin: 10 }}>
-      Dashboard
-    </Link>
     <Link to="/about-us" style={{ margin: 10 }}>
       About Us
-    </Link>
-    <Link to="/login" style={{ margin: 10 }}>
-      Login
     </Link>
     <Link to={{ pathname: "/recherche", search: "q=Poncirus trofoliata" }}>
       Recherche "P. trifoliata"
     </Link>
+    {isAuthenticated ? (
+      <Link to="/dashboard" style={{ margin: 10 }}>
+        Dashboard
+      </Link>
+    ) : (
+      <Link to="/authentification" style={{ margin: 10 }}>
+        Connexion
+      </Link>
+    )}
   </nav>
 );
 
@@ -64,12 +67,13 @@ class App extends React.Component {
     return (
       <Provider
         theme={{
-          font: '"Proxima Nova", Helvetica, sans-serif',
+          font:
+            '"Proxima Nova", "Brandon Grotesque", "Brandon Text", Helvetica, sans-serif',
           fontSizes: [12, 16, 24, 36, 48, 72, 142, 200]
         }}
       >
         <div className="App">
-          <Links />
+          <Links isAuthenticated={this.props.isAuthenticated} />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
