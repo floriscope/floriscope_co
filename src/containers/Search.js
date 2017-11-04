@@ -26,25 +26,28 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ changeSearchState }, dispatch);
 
-const Container = styled("div")`
+// @fixme add media-query for SearchContainer
+
+const SearchContainer = styled("div")`
   padding: 0 64px 6px 64px;
   overflow: hidden;
   backface-visibility: hidden;
   will-change: overflow;
   height: 100vh;
+  width: 100%;
   display: grid;
   grid-gap: 16px;
-  grid-template-areas: "logo header header" "aside main main"
-    "aside pagination pagination";
+  grid-template-areas: "logo search search" "aside stats sort" "aside main main";
+  grid-template-columns: 25vw auto auto;
   background: #f8f9f9;
 `;
 const Header = styled("header")`
-  grid-area: header;
+  grid-area: search;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   text-align: center;
-  padding: 24px 12px;
+  padding: 24px 0;
 `;
 const Aside = styled("aside")`
   overflow: auto;
@@ -54,7 +57,7 @@ const Aside = styled("aside")`
   -ms-overflow-style: none;
   grid-area: aside
   postion: relative;
-  width: 200px;
+  width: auto;
   margin-bottom: 52px;
   &::-webkit-scrollbar {
     display: none;
@@ -74,6 +77,18 @@ const Main = styled("main")`
   }
 `;
 
+const StatsWrapper = styled("div")`grid-area: stats;`;
+const SortByWrapper = styled("div")`
+  grid-area: sort;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+const RefinementWrapper = styled("div")`
+  background: #c3c3c3;
+  padding: 0 12px;
+`;
+
 const Hit = ({ hit }) => (
   <div className="hit">
     <div className="hit-image">
@@ -87,26 +102,18 @@ const Hit = ({ hit }) => (
 );
 
 const Sidebar = () => (
-  <div className="sidebar">
+  <RefinementWrapper>
     <h5>Catégorie</h5>
     <RefinementList attributeName="category" />
+    <h5>Humidité du sol</h5>
+    <RefinementList attributeName="humidity" />
     <h5>Écorce</h5>
     <RefinementList attributeName="bark" withSearchBox />
-  </div>
+  </RefinementWrapper>
 );
 
 const Content = () => (
   <div className="content">
-    <div className="info">
-      <Stats />
-      <SortBy
-        defaultRefinement="vegebasePlantes"
-        items={[
-          { label: "Les plus documentées", value: "vegebasePlantes" },
-          { label: "A-Z", value: "vegebasePlante_taxonDesc" }
-        ]}
-      />
-    </div>
     <Hits hitComponent={Hit} />
     <div className="pagination">
       <Pagination showLast />
@@ -127,19 +134,31 @@ class Search extends React.Component {
         searchState={this.props.searchState}
         onSearchStateChange={state => this.props.changeSearchState(state)}
       >
-        <Container>
+        <SearchContainer>
           <Header>
             <SearchBox
               translations={{ placeholder: "Rerchercher des plantes..." }}
             />
           </Header>
+          <StatsWrapper>
+            <Stats />
+          </StatsWrapper>
+          <SortByWrapper>
+            <SortBy
+              defaultRefinement="vegebasePlantes"
+              items={[
+                { label: "Les plus documentées", value: "vegebasePlantes" },
+                { label: "A-Z", value: "vegebasePlante_taxonDesc" }
+              ]}
+            />
+          </SortByWrapper>
           <Aside>
             <Sidebar />
           </Aside>
           <Main>
             <Content />
           </Main>
-        </Container>
+        </SearchContainer>
       </InstantSearch>
     );
   }

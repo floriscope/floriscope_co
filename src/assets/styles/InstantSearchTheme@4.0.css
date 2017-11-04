@@ -917,7 +917,6 @@
 
 .ais-SearchBox__root {
   position: relative;
-  max-width: 500px;
   width: 100%;
   height: 46px;
   white-space: nowrap;
