@@ -17,22 +17,22 @@ const Section = styled("section")`
 
   :nth-of-type(1) {
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)),
-      url("https://source.unsplash.com/1600x900/?flower") no-repeat fixed;
+      url("https://source.unsplash.com/1980x1020/?flower") no-repeat fixed;
   }
   :nth-of-type(2) {
     height: 200vh;
     align-items: flex-start;
     justify-content: center;
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)),
-      url("https://source.unsplash.com/1600x900/?fern") no-repeat fixed;
+      url("https://source.unsplash.com/1980x1020/?fern") no-repeat fixed;
   }
   :nth-of-type(3) {
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)),
-      url("https://source.unsplash.com/1600x900/?plant") no-repeat fixed;
+      url("https://source.unsplash.com/1980x1020/?plant") no-repeat fixed;
   }
   :nth-of-type(4) {
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)),
-      url("https://source.unsplash.com/1600x900/?tree") no-repeat fixed;
+      url("https://source.unsplash.com/1980x1020/?tree") no-repeat fixed;
   }
 `;
 

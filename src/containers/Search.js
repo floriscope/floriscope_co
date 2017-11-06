@@ -71,7 +71,7 @@ const Main = styled("main")`
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
   grid-area: main;
-  width: 800px;
+  width: 100%;
   margin-bottom: 52px;
   &::-webkit-scrollbar {
     display: none;
@@ -96,7 +96,7 @@ const HitsContainer = styled("div")`
   justify-content: center;
 `;
 const Hit = ({ hit }) => (
-  <Card width={1} m={24}>
+  <Card m={24}>
     <BackgroundImage ratio={1 / 4} src={hit.cover} />
     <Subhead p={2} f={1}>
       <Highlight attributeName="taxon" hit={hit} />

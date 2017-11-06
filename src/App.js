@@ -4,6 +4,7 @@ import About from "./containers/About";
 import Authentification from "./containers/Authentification";
 import Collection from "./containers/Collection";
 import Dashboard from "./containers/Dashboard";
+import HeaderNavBar from "./containers/HeaderNavBar";
 import Home from "./containers/Home";
 import Login from "./containers/auth/Login";
 import Media from "./containers/Media";
@@ -39,29 +40,6 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
   );
 };
 
-const Links = ({ isAuthenticated }) => (
-  <nav style={{ margin: 10 }}>
-    <Link to="/" style={{ margin: 10 }}>
-      Home
-    </Link>
-    <Link to="/about-us" style={{ margin: 10 }}>
-      About Us
-    </Link>
-    <Link to={{ pathname: "/recherche", search: "q=Poncirus trofoliata" }}>
-      Recherche "P. trifoliata"
-    </Link>
-    {isAuthenticated ? (
-      <Link to="/dashboard" style={{ margin: 10 }}>
-        Dashboard
-      </Link>
-    ) : (
-      <Link to="/authentification" style={{ margin: 10 }}>
-        Connexion
-      </Link>
-    )}
-  </nav>
-);
-
 class App extends React.Component {
   render() {
     return (
@@ -73,7 +51,7 @@ class App extends React.Component {
         }}
       >
         <div className="App">
-          <Links isAuthenticated={this.props.isAuthenticated} />
+          <HeaderNavBar bgc="rgba(2, 185, 147, 0.90)" />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />

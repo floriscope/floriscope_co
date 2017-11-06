@@ -55,6 +55,10 @@ acorn@^5.0.0, acorn@^5.1.1:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.1.2.tgz#911cb53e036807cf0fa778dc5d370fbd864246d7"
 
+add-px-to-style@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/add-px-to-style/-/add-px-to-style-1.0.0.tgz#d0c135441fa8014a8137904531096f67f28f263a"
+
 address@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/address/-/address-1.0.2.tgz#480081e82b587ba319459fef512f516fe03d58af"
@@ -1991,6 +1995,13 @@ currently-unhandled@^0.4.1:
   resolved "https://registry.yarnpkg.com/currently-unhandled/-/currently-unhandled-0.4.1.tgz#988df33feab191ef799a61369dd76c17adf957ea"
   dependencies:
     array-find-index "^1.0.1"
+
+cxs@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/cxs/-/cxs-6.1.0.tgz#8d6193230a79fd25f9a3c2919de913967b01c80f"
+  dependencies:
+    objss "^1.0.3"
+    tag-hoc "^1.0.0-0"
 
 d@1:
   version "1.0.0"
@@ -5025,6 +5036,12 @@ object.values@^1.0.4:
     function-bind "^1.1.0"
     has "^1.0.1"
 
+objss@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/objss/-/objss-1.0.3.tgz#d8b7dc09c94942a15249cb6a090557363fe61bc3"
+  dependencies:
+    add-px-to-style "^1.0.0"
+
 obuf@^1.0.0, obuf@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.1.tgz#104124b6c602c6796881a042541d36db43a5264e"
@@ -7029,7 +7046,7 @@ table@^4.0.1:
     slice-ansi "1.0.0"
     string-width "^2.1.1"
 
-tag-hoc@^1.0.0:
+tag-hoc@^1.0.0, tag-hoc@^1.0.0-0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/tag-hoc/-/tag-hoc-1.0.0.tgz#36ddc5f8831c40926ea520743cbddcc34f3c3ed9"
 
