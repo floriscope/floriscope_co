@@ -13,6 +13,7 @@ import {
 } from "react-instantsearch/dom";
 import styled, { css } from "react-emotion";
 
+import { Link } from "react-router-dom";
 import React from "react";
 import { bindActionCreators } from "redux";
 import { changeSearchState } from "../reducers/searchReducer";
@@ -99,7 +100,9 @@ const Hit = ({ hit }) => (
   <Card m={24}>
     <BackgroundImage ratio={1 / 4} src={hit.cover} />
     <Subhead p={2} f={1}>
-      <Highlight attributeName="taxon" hit={hit} />
+      <Link to={{ pathname: `/plante/${hit.slug}` }}>
+        <Highlight attributeName="taxon" hit={hit} />
+      </Link>
     </Subhead>
     <Text p={2} m={2}>
       <Highlight attributeName="nom" hit={hit} />

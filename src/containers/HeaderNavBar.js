@@ -1,12 +1,13 @@
-import { Button, Container, NavLink, Toolbar } from "rebass-emotion";
+import { Button, Container, Toolbar } from "rebass-emotion";
 import { Dropdown, Icon, Image, Menu } from "semantic-ui-react";
+import { Link, NavLink } from "react-router-dom";
 import styled, { css } from "react-emotion";
 
 import Headroom from "react-headroom";
-import { Link } from "react-router-dom";
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import cxs from "cxs";
 import { logout } from "../reducers/authReducer";
 
 const UserNavLink = ({ user, logout }) => (
@@ -41,17 +42,18 @@ const AuthNav = ({ isAuthenticated, user, logout }) => {
   );
 };
 
-class NavLinkExtanded extends Link {
-  // Extand Rebass NavLink with ReactRouter Link props
-  render() {
-    const { to, children, ...rest } = this.props;
-    return (
-      <NavLink {...rest} onClick={this.handleClick}>
-        {children}
-      </NavLink>
-    );
+const navLink_default = cxs({
+  margin: "10px",
+  fontSize: "16px",
+  color: "white",
+  ":hover": {
+    color: "black"
   }
-}
+});
+const navLink_active = {
+  color: "black",
+  fontWeight: "600"
+};
 
 class HeaderNavBar extends React.Component {
   logout = () => {
@@ -71,13 +73,28 @@ class HeaderNavBar extends React.Component {
         }}
       >
         <Toolbar w={1} px={2} style={{ backgroundColor: this.props.bgc }}>
-          <NavLink href="/">Accueil</NavLink>
-          <NavLink href="/about-us">À propos</NavLink>
-          <NavLinkExtanded
+          <NavLink
+            exact
+            className={navLink_default}
+            activeStyle={navLink_active}
+            to="/"
+          >
+            Accueil
+          </NavLink>
+          <NavLink
+            className={navLink_default}
+            activeStyle={navLink_active}
+            to="/about-us"
+          >
+            À propos
+          </NavLink>
+          <NavLink
+            className={navLink_default}
+            activeStyle={navLink_active}
             to={{ pathname: "/recherche", search: "q=Poncirus trofoliata" }}
           >
             Recherche "P. trifoliata"
-          </NavLinkExtanded>
+          </NavLink>
           <Container />
           <AuthNav
             isAuthenticated={this.props.isAuthenticated}
@@ -92,7 +109,8 @@ class HeaderNavBar extends React.Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  user: state.auth.user.user
+  user: state.auth.user.user,
+  location: state.routing.location
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ logout }, dispatch);
