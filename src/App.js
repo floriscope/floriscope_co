@@ -4,7 +4,7 @@ import About from "./containers/About";
 import Authentification from "./containers/Authentification";
 import Collection from "./containers/Collection";
 import Dashboard from "./containers/Dashboard";
-import HeaderBar from "./components/HeaderBar";
+import HeaderNavBar from "./containers/HeaderNavBar";
 import Home from "./containers/Home";
 import Login from "./containers/auth/Login";
 import Media from "./containers/Media";
@@ -14,7 +14,6 @@ import PrivateCollection from "./containers/PrivateCollection";
 import { Provider } from "rebass-emotion";
 import React from "react";
 import Search from "./containers/Search";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
@@ -22,7 +21,7 @@ const mapStateToProps = state => ({
 });
 
 const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
-  const { authStatus } = rest;
+  // const { authStatus } = rest;
   return (
     <Route
       {...rest}
@@ -32,7 +31,7 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
         ) : (
           <Redirect
             to={{
-              pathname: "/login",
+              pathname: "/authentification",
               state: { from: props.location }
             }}
           />
@@ -41,39 +40,18 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
   );
 };
 
-const Protected = () => <h1>Protected</h1>;
-
-const Links = () => (
-  <nav style={{ margin: 10 }}>
-    <Link to="/" style={{ margin: 10 }}>
-      Home
-    </Link>
-    <Link to="/dashboard" style={{ margin: 10 }}>
-      Dashboard
-    </Link>
-    <Link to="/about-us" style={{ margin: 10 }}>
-      About Us
-    </Link>
-    <Link to="/login" style={{ margin: 10 }}>
-      Login
-    </Link>
-    <Link to={{ pathname: "/recherche", search: "q=Poncirus trofoliata" }}>
-      Recherche "P. trifoliata"
-    </Link>
-  </nav>
-);
-
 class App extends React.Component {
   render() {
     return (
       <Provider
         theme={{
-          font: '"Proxima Nova", Helvetica, sans-serif',
+          font:
+            '"Proxima Nova", "Brandon Grotesque", "Brandon Text", Helvetica, sans-serif',
           fontSizes: [12, 16, 24, 36, 48, 72, 142, 200]
         }}
       >
         <div className="App">
-          <Links />
+          <HeaderNavBar bgc="rgba(2, 185, 147, 0.90)" />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
