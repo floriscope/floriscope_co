@@ -24,11 +24,11 @@ const Section = styled("section")`
     align-items: flex-start;
     justify-content: center;
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)),
-      url("https://source.unsplash.com/1980x1020/?fern") no-repeat fixed;
+      url("https://source.unsplash.com/1980x1020/?bark") no-repeat fixed;
   }
   :nth-of-type(3) {
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)),
-      url("https://source.unsplash.com/1980x1020/?plant") no-repeat fixed;
+      url("https://source.unsplash.com/1980x1020/?fern") no-repeat fixed;
   }
   :nth-of-type(4) {
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)),
