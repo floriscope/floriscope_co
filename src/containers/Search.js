@@ -29,12 +29,14 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators({ changeSearchState }, dispatch);
 
 // @fixme add media-query for SearchContainer
+// @fixme aside and main scrolling bug on Safari
+//  possible fix = going back to display: flex
+//  inspiration here: https://webdesign.tutsplus.com/tutorials/how-to-make-responsive-scrollable-panels-with-flexbox--cms-23269
 
 const SearchContainer = styled("div")`
   padding: 0 64px 6px 64px;
   overflow: hidden;
-  backface-visibility: hidden;
-  will-change: overflow;
+
   height: 100vh;
   width: 100%;
   display: grid;
