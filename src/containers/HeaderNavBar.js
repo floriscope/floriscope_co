@@ -9,18 +9,31 @@ import { connect } from "react-redux";
 import cxs from "cxs";
 import { logout } from "../reducers/authReducer";
 
+const Dropdown_item = cxs({
+  padding: "0.6rem 0.8rem !important",
+  fontSize: "0.8rem !important"
+});
+const Dropdown_menu = cxs({
+  left: "-20px !important"
+});
+
 const UserNavLink = ({ user, logout }) => (
   <Container mx={4}>
     <Image avatar src={user.profile.avatar_url} />
     <Dropdown pointing text={user.email} className="link item">
-      <Dropdown.Menu>
-        <Dropdown.Header>Gérer</Dropdown.Header>
-        <Dropdown.Item>Taxonomie</Dropdown.Item>
-        <Dropdown.Item>Photothèque</Dropdown.Item>
-        <Dropdown.Item>Données</Dropdown.Item>
+      <Dropdown.Menu className={Dropdown_menu}>
+        <Dropdown.Header>RESSOURCES</Dropdown.Header>
+        <Dropdown.Item className={Dropdown_item}>
+          Listes de plantes
+        </Dropdown.Item>
+        <Dropdown.Item className={Dropdown_item}>
+          Recherches sauvegardées
+        </Dropdown.Item>
+        <Dropdown.Item className={Dropdown_item}>Photothèque</Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Header>Compte</Dropdown.Header>
-        <Dropdown.Item onClick={logout}>
+        <Dropdown.Header>MON COMPTE</Dropdown.Header>
+        <Dropdown.Item className={Dropdown_item}>Paramètres</Dropdown.Item>
+        <Dropdown.Item onClick={logout} className={Dropdown_item}>
           <Icon name="cancel" />
           <span className="text">Déconnexion</span>
         </Dropdown.Item>
@@ -29,12 +42,18 @@ const UserNavLink = ({ user, logout }) => (
   </Container>
 );
 
-const AuthNav = ({ isAuthenticated, user, logout }) => {
+const AuthNav = ({ isAuthenticated, user, logout, location }) => {
   return isAuthenticated ? (
     <UserNavLink user={user} logout={logout} />
   ) : (
     <Button bg="cyan8" color="white" mr={3}>
-      <Link to="/authentification" style={{ margin: 10, color: "white" }}>
+      <Link
+        to={{
+          pathname: "/authentification",
+          state: { from: location }
+        }}
+        style={{ margin: 10, color: "white" }}
+      >
         Connexion
       </Link>
     </Button>
@@ -98,6 +117,7 @@ class HeaderNavBar extends React.Component {
           <AuthNav
             isAuthenticated={this.props.isAuthenticated}
             user={this.props.user}
+            location={this.props.location}
             logout={() => this.logout()}
           />
         </Toolbar>
