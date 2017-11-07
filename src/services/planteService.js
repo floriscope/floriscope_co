@@ -18,7 +18,7 @@ class PlanteService {
       );
     }
     const data = await response.json();
-    return data;
+    return data.plante;
   }
   async getPlanteResources(id, resourceName, token) {
     const url = `${BASE_URL}/${API_VERSION}/plantes/${id}/${resourceName}`;

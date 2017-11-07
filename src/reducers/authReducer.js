@@ -24,6 +24,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         user: action.user,
+        authToken: action.user.user.auth_token,
         isAuthenticated: true,
         isLoginIn: false,
         redirectToReferrer: true

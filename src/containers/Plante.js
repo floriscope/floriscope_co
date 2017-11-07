@@ -214,7 +214,10 @@ class Plante extends React.Component {
   };
   componentDidMount() {
     console.log("Plante componentDidMount", this.props);
-    this.getPlante(this.props.match.params.slug, this.props.user.auth_token);
+    this.props.getPlante(
+      this.props.match.params.slug,
+      this.props.auth.authToken
+    );
   }
   render() {
     return (
@@ -259,7 +262,7 @@ class Plante extends React.Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  user: state.auth.user,
+  auth: state.auth,
   routing: state.routing,
   currentPlante: state.routing.location.state.currentPlante,
   plante: state.plante.plante

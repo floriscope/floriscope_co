@@ -53,7 +53,7 @@ export function getPlante(id, token) {
     try {
       const plante = await planteService.getPlante(id, token);
       dispatch({ type: "plante/FETCHING_PLANTE" });
-      dispatch({ type: "plante/LOGIN_IN", plante });
+      dispatch({ type: "plante/PLANTE_FETCHED", plante });
       console.log("fetched plante", plante);
     } catch (error) {
       console.error(error);
