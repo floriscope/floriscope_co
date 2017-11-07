@@ -5,14 +5,10 @@ import styled, { css } from "react-emotion";
 import React from "react";
 import Transition from "react-transition-group/Transition";
 import anime from "animejs";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { getPlante } from "../reducers/planteReducer";
 import { withRouter } from "react-router-dom";
-
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  user: state.auth.user.user,
-  currentPlante: state.routing.location.state.currentPlante
-});
 
 const LeftPanel = styled("div")`
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)),
@@ -216,8 +212,9 @@ class Plante extends React.Component {
   togglePanels = () => {
     this.setState({ toggle: !this.state.toggle });
   };
-  componentWillMount() {
-    console.log(this.props);
+  componentDidMount() {
+    console.log("Plante componentDidMount", this.props);
+    this.getPlante(this.props.match.params.slug, this.props.user.auth_token);
   }
   render() {
     return (
@@ -260,4 +257,15 @@ class Plante extends React.Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps, null)(Plante));
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  user: state.auth.user,
+  routing: state.routing,
+  currentPlante: state.routing.location.state.currentPlante,
+  plante: state.plante.plante
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ getPlante }, dispatch);
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Plante));
