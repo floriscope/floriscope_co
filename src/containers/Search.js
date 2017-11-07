@@ -100,7 +100,9 @@ const Hit = ({ hit }) => (
   <Card m={24}>
     <BackgroundImage ratio={1 / 4} src={hit.cover} />
     <Subhead p={2} f={1}>
-      <Link to={{ pathname: `/plante/${hit.slug}` }}>
+      <Link
+        to={{ pathname: `/plante/${hit.slug}`, state: { currentPlante: hit } }}
+      >
         <Highlight attributeName="taxon" hit={hit} />
       </Link>
     </Subhead>

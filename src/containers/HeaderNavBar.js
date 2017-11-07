@@ -1,7 +1,6 @@
 import { Button, Container, Toolbar } from "rebass-emotion";
-import { Dropdown, Icon, Image, Menu } from "semantic-ui-react";
+import { Dropdown, Icon, Image } from "semantic-ui-react";
 import { Link, NavLink } from "react-router-dom";
-import styled, { css } from "react-emotion";
 
 import Headroom from "react-headroom";
 import React from "react";
