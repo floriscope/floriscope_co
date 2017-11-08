@@ -1,4 +1,9 @@
 import { Column, Container, Heading, Row } from "rebass-emotion";
+import {
+  clearPlante,
+  getPlante,
+  getPlanteResources
+} from "../reducers/planteReducer";
 import { color, fontSize, space, width } from "styled-system";
 import styled, { css } from "react-emotion";
 
@@ -7,7 +12,6 @@ import Transition from "react-transition-group/Transition";
 import anime from "animejs";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { getPlante } from "../reducers/planteReducer";
 import { withRouter } from "react-router-dom";
 
 const LeftPanel = styled("div")`
@@ -212,10 +216,27 @@ class Plante extends React.Component {
   togglePanels = () => {
     this.setState({ toggle: !this.state.toggle });
   };
+
+  componentWillMount() {
+    console.log("Plante/componentWillMount", this.props);
+    this.props.clearPlante();
+  }
   componentDidMount() {
     console.log("Plante componentDidMount", this.props);
     this.props.getPlante(
       this.props.match.params.slug,
+      this.props.auth.authToken
+    );
+    const resources = ["illustrations", "collections", "desscriptors"];
+
+    this.props.getPlanteResources(
+      this.props.match.params.slug,
+      "illustrations",
+      this.props.auth.authToken
+    );
+    this.props.getPlanteResources(
+      this.props.match.params.slug,
+      "collections",
       this.props.auth.authToken
     );
   }
@@ -269,6 +290,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getPlante }, dispatch);
+  bindActionCreators({ clearPlante, getPlante, getPlanteResources }, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Plante));
