@@ -13,6 +13,7 @@ import {
 } from "react-instantsearch/dom";
 import styled, { css } from "react-emotion";
 
+import { Link } from "react-router-dom";
 import React from "react";
 import { bindActionCreators } from "redux";
 import { changeSearchState } from "../reducers/searchReducer";
@@ -28,12 +29,14 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators({ changeSearchState }, dispatch);
 
 // @fixme add media-query for SearchContainer
+// @fixme aside and main scrolling bug on Safari
+//  possible fix = going back to display: flex
+//  inspiration here: https://webdesign.tutsplus.com/tutorials/how-to-make-responsive-scrollable-panels-with-flexbox--cms-23269
 
 const SearchContainer = styled("div")`
   padding: 0 64px 6px 64px;
   overflow: hidden;
-  backface-visibility: hidden;
-  will-change: overflow;
+
   height: 100vh;
   width: 100%;
   display: grid;
@@ -99,7 +102,11 @@ const Hit = ({ hit }) => (
   <Card m={24}>
     <BackgroundImage ratio={1 / 4} src={hit.cover} />
     <Subhead p={2} f={1}>
-      <Highlight attributeName="taxon" hit={hit} />
+      <Link
+        to={{ pathname: `/plante/${hit.slug}`, state: { currentPlante: hit } }}
+      >
+        <Highlight attributeName="taxon" hit={hit} />
+      </Link>
     </Subhead>
     <Text p={2} m={2}>
       <Highlight attributeName="nom" hit={hit} />

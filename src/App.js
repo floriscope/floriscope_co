@@ -1,4 +1,4 @@
-import { Link, Redirect, Route, Switch, withRouter } from "react-router-dom";
+import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 
 import About from "./containers/About";
 import Authentification from "./containers/Authentification";

@@ -3,6 +3,7 @@ import authReducer from "./authReducer";
 import { combineReducers } from "redux";
 import counter from "./counter";
 import { reducer as formReducer } from "redux-form";
+import planteReducer from "./planteReducer";
 import { routerReducer } from "react-router-redux";
 import searchReducer from "./searchReducer";
 
@@ -12,5 +13,6 @@ export default combineReducers({
   auth: authReducer,
   form: formReducer,
   search: searchReducer,
+  plante: planteReducer,
   apollo: apolloClient.reducer()
 });

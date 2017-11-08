@@ -1,11 +1,11 @@
 import "semantic-ui-css/semantic.min.css";
 import "./assets/styles/index.css";
 
-import { ConnectedRouter, push } from "react-router-redux";
 import store, { history } from "./store";
 
 import { ApolloProvider } from "react-apollo";
 import App from "./App";
+import { ConnectedRouter } from "react-router-redux";
 import React from "react";
 import client from "./apollo";
 import { render } from "react-dom";

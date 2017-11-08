@@ -20,7 +20,18 @@ Orange #F17959 ;  */
   font-weight: 300;
   font-style: normal;
 }
-
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("../fonts/ProximaNova-Semibold.eot");
+  src: url("../fonts/ProximaNova-Semibold.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/ProximaNova-Semibold.woff2") format("woff2"),
+    url("../fonts/ProximaNova-Semibold.woff") format("woff"),
+    url("../fonts/ProximaNova-Semibold.ttf") format("truetype"),
+    url("../fonts/ProximaNova-Semibold.svg#ProximaNova-Semibold") format("svg");
+  font-weight: 600;
+  font-style: normal;
+}
 @font-face {
   font-family: "Proxima Nova";
   src: url("../fonts/ProximaNova-LightIt.eot");

@@ -8,7 +8,7 @@ const initialState = {
   redirectToReferrer: false
 };
 
-// Reducers
+/* REDUCERS */
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -24,6 +24,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         user: action.user,
+        authToken: action.user.user.auth_token,
         isAuthenticated: true,
         isLoginIn: false,
         redirectToReferrer: true
@@ -43,7 +44,7 @@ export default (state = initialState, action) => {
   }
 };
 
-// actionCreators
+/* actionCreators */
 
 export function login(credentials) {
   return async (dispatch, getState) => {
@@ -58,14 +59,15 @@ export function login(credentials) {
   };
 }
 
-// NEW SYNTAX - ARROW FN
+// New actionCreator syntax
+
 export const logout = () => dispatch => {
   dispatch({
     type: "auth/LOG_OUT"
   });
 };
 
-// Actions
+/* ACTIONS */
 export const TRY_LOGIN = "auth/TRY_LOGIN";
 export const LOGIN_IN = "auth/LOGIN_IN";
 export const LOG_OUT = "auth/LOG_OUT";
