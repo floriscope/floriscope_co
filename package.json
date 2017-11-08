@@ -1,6 +1,11 @@
 {
   "name": "floriscope",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "license": "MIT",
+  "author": {
+    "name": "Gaëtan DUHAMEL",
+    "url": "https://github.com/gaetan-pc"
+  },
   "private": true,
   "dependencies": {
     "animejs": "^2.2.0",
