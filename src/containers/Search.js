@@ -11,6 +11,7 @@ import {
   SortBy,
   Stats
 } from "react-instantsearch/dom";
+import { autoRehydrate, persistStore } from "redux-persist";
 import styled, { css } from "react-emotion";
 
 import { Link } from "react-router-dom";
@@ -19,14 +20,6 @@ import { bindActionCreators } from "redux";
 import { changeSearchState } from "../reducers/searchReducer";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-
-const mapStateToProps = state => ({
-  searchState: state.search.searchState,
-  indexName: state.search.indexName
-});
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ changeSearchState }, dispatch);
 
 // @fixme add media-query for SearchContainer
 // @fixme aside and main scrolling bug on Safari
@@ -139,6 +132,18 @@ const Content = () => (
 class Search extends React.Component {
   componentDidMount() {
     console.log("SEARCH props", this.props);
+    console.log("Router Location Search", this.props.location.search);
+    if (this.props.location.search !== undefined) {
+      const query = new URLSearchParams(this.props.location.search).get("q");
+      console.log("QUERY FROM URL", query);
+      const newSearchState = { query: query };
+      this.props.changeSearchState(newSearchState);
+    }
+  }
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.location != this.props.location) {
+      console.log("Location will change!");
+    }
   }
   render() {
     return (
@@ -178,5 +183,14 @@ class Search extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  searchState: state.search.searchState,
+  location: state.routing.location,
+  indexName: state.search.indexName
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ changeSearchState }, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
