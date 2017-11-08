@@ -1,6 +1,7 @@
 import { applyMiddleware, compose, createStore } from "redux";
 import { autoRehydrate, persistStore } from "redux-persist";
 
+import client from "./apollo";
 import createHistory from "history/createBrowserHistory";
 import localForage from "localforage";
 import logger from "redux-logger";
@@ -12,7 +13,12 @@ export const history = createHistory();
 
 const initialState = {};
 const enhancers = [autoRehydrate()];
-const middleware = [logger, thunk, routerMiddleware(history)];
+const middleware = [
+  logger,
+  thunk,
+  client.middleware(),
+  routerMiddleware(history)
+];
 
 if (process.env.NODE_ENV === "development") {
   const devToolsExtension = window.devToolsExtension;
@@ -27,6 +33,6 @@ const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
 const store = createStore(rootReducer, initialState, composedEnhancers);
 persistStore(store, {
   storage: localForage,
-  whitelist: ["auth"]
+  whitelist: ["auth", "search"]
 });
 export default store;

@@ -1,23 +1,22 @@
-import "./assets/styles/index.css";
 import "semantic-ui-css/semantic.min.css";
+import "./assets/styles/index.css";
 
-import { ConnectedRouter, push } from "react-router-redux";
 import store, { history } from "./store";
 
+import { ApolloProvider } from "react-apollo";
 import App from "./App";
-import { Provider } from "react-redux";
+import { ConnectedRouter } from "react-router-redux";
 import React from "react";
+import client from "./apollo";
 import { render } from "react-dom";
 
 const target = document.querySelector("#root");
 
 render(
-  <Provider store={store}>
+  <ApolloProvider store={store} client={client}>
     <ConnectedRouter history={history}>
-      <div>
-        <App />
-      </div>
+      <App />
     </ConnectedRouter>
-  </Provider>,
+  </ApolloProvider>,
   target
 );
