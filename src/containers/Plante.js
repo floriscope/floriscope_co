@@ -1,4 +1,9 @@
 import { Column, Container, Heading, Row } from "rebass-emotion";
+import {
+  clearPlante,
+  getPlante,
+  getPlanteResources
+} from "../reducers/planteReducer";
 import { color, fontSize, space, width } from "styled-system";
 import styled, { css } from "react-emotion";
 
@@ -7,7 +12,6 @@ import Transition from "react-transition-group/Transition";
 import anime from "animejs";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { getPlante } from "../reducers/planteReducer";
 import { withRouter } from "react-router-dom";
 
 const LeftPanel = styled("div")`
@@ -212,12 +216,25 @@ class Plante extends React.Component {
   togglePanels = () => {
     this.setState({ toggle: !this.state.toggle });
   };
+
+  componentWillMount() {
+    console.log("Plante/componentWillMount", this.props);
+    this.props.clearPlante();
+  }
   componentDidMount() {
     console.log("Plante componentDidMount", this.props);
     this.props.getPlante(
       this.props.match.params.slug,
       this.props.auth.authToken
     );
+    const resources = ["illustrations", "collections", "descriptors"];
+    resources.map(i => {
+      this.props.getPlanteResources(
+        this.props.match.params.slug,
+        i,
+        this.props.auth.authToken
+      );
+    });
   }
   render() {
     return (
@@ -241,7 +258,13 @@ class Plante extends React.Component {
             {this.state.toggle ? "Toggle Left Panel" : "Toggle Right Panel"}
           </button>
         </LeftPanel>
-        <CenterPanel toggle={this.state.toggle}>Column</CenterPanel>
+        <CenterPanel toggle={this.state.toggle}>
+          <div>
+            {this.props.planteIllustrations.length} Illustrations fetched
+          </div>
+          <div>{this.props.planteCollections.length} Collections fetched</div>
+          <div>{this.props.planteDescriptors.length} Descriptors fetched</div>
+        </CenterPanel>
         <RightPanel toggle={this.state.toggle}>
           <Header
             color={"black"}
@@ -265,10 +288,13 @@ const mapStateToProps = state => ({
   auth: state.auth,
   routing: state.routing,
   currentPlante: state.routing.location.state.currentPlante,
-  plante: state.plante.plante
+  plante: state.plante.plante,
+  planteIllustrations: state.plante.illustrations,
+  planteCollections: state.plante.collections,
+  planteDescriptors: state.plante.descriptors
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getPlante }, dispatch);
+  bindActionCreators({ clearPlante, getPlante, getPlanteResources }, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Plante));
