@@ -36,7 +36,7 @@ class PlanteService {
       );
     }
     const data = await response.json();
-    return data[`${resourceName}`];
+    return data;
   }
 }
 

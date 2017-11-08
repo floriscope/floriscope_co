@@ -227,18 +227,14 @@ class Plante extends React.Component {
       this.props.match.params.slug,
       this.props.auth.authToken
     );
-    const resources = ["illustrations", "collections", "desscriptors"];
-
-    this.props.getPlanteResources(
-      this.props.match.params.slug,
-      "illustrations",
-      this.props.auth.authToken
-    );
-    this.props.getPlanteResources(
-      this.props.match.params.slug,
-      "collections",
-      this.props.auth.authToken
-    );
+    const resources = ["illustrations", "collections", "descriptors"];
+    resources.map(i => {
+      this.props.getPlanteResources(
+        this.props.match.params.slug,
+        i,
+        this.props.auth.authToken
+      );
+    });
   }
   render() {
     return (
@@ -262,7 +258,13 @@ class Plante extends React.Component {
             {this.state.toggle ? "Toggle Left Panel" : "Toggle Right Panel"}
           </button>
         </LeftPanel>
-        <CenterPanel toggle={this.state.toggle}>Column</CenterPanel>
+        <CenterPanel toggle={this.state.toggle}>
+          <div>
+            {this.props.planteIllustrations.length} Illustrations fetched
+          </div>
+          <div>{this.props.planteCollections.length} Collections fetched</div>
+          <div>{this.props.planteDescriptors.length} Descriptors fetched</div>
+        </CenterPanel>
         <RightPanel toggle={this.state.toggle}>
           <Header
             color={"black"}
@@ -286,7 +288,10 @@ const mapStateToProps = state => ({
   auth: state.auth,
   routing: state.routing,
   currentPlante: state.routing.location.state.currentPlante,
-  plante: state.plante.plante
+  plante: state.plante.plante,
+  planteIllustrations: state.plante.illustrations,
+  planteCollections: state.plante.collections,
+  planteDescriptors: state.plante.descriptors
 });
 
 const mapDispatchToProps = dispatch =>

@@ -30,10 +30,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         fetchingPlante: true,
-        fetchPlanteFailed: false,
-        illustrations: [],
-        collections: [],
-        descriptors: []
+        fetchPlanteFailed: false
       };
 
     case PLANTE_FETCHED:
@@ -121,17 +118,17 @@ export function getPlanteResources(id, resourceName, token) {
           dispatch({ type: "plante/FETCHING_PLANTE_RESOURCES" });
           dispatch({
             type: "plante/PLANTE_ILLUSTRATIONS_FETCHED",
-            illustrations: resources
+            illustrations: resources.illustrations
           });
-          console.log("fetched plante illustrations", resourceName);
+          console.log("fetched plante illustrations", resources);
           break;
         case "collections":
           dispatch({ type: "plante/FETCHING_PLANTE_RESOURCES" });
           dispatch({
             type: "plante/PLANTE_COLLECTIONS_FETCHED",
-            collections: resources
+            collections: resources.collections
           });
-          console.log("fetched plante collections", resourceName);
+          console.log("fetched plante collections", resources);
           break;
         case "descriptors":
           dispatch({ type: "plante/FETCHING_PLANTE_RESOURCES" });
@@ -139,7 +136,7 @@ export function getPlanteResources(id, resourceName, token) {
             type: "plante/PLANTE_DESCRIPTORS_FETCHED",
             descriptors: resources
           });
-          console.log("fetched plante descriptors", resourceName);
+          console.log("fetched plante descriptors", resources);
           break;
         default:
           return;
