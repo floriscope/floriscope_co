@@ -2,6 +2,7 @@ import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 
 import About from "./containers/About";
 import Admin from "./containers/Admin";
+import AdminCollections from "./containers/admin/AdminCollections";
 import Authentification from "./containers/Authentification";
 import Collection from "./containers/Collection";
 import Dashboard from "./containers/Dashboard";
@@ -17,6 +18,8 @@ import React from "react";
 import Search from "./containers/Search";
 import Unauthorized from "./containers/Unauthorized";
 import { connect } from "react-redux";
+import { persistStore } from "redux-persist";
+import store from "./store";
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
@@ -69,14 +72,27 @@ const AdminRoute = ({
 };
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = { rehydrated: false };
+  }
+
   isAdmin = role => {
     return role == "admin" ? true : false;
   };
+  componentWillMount() {
+    persistStore(store, {}, () => {
+      this.setState({ rehydrated: true });
+    });
+  }
   componentDidMount() {
     console.log("AppDidMount/props", this.props);
   }
 
   render() {
+    if (!this.state.rehydrated) {
+      return <div style={{ color: "white", fontSize: "67px" }}>Loading...</div>;
+    }
     return (
       <Provider
         theme={{
@@ -107,8 +123,15 @@ class App extends React.Component {
             <Route path="/m/:uuid" component={Media} />
             <Route path="/recherche" component={Search} />
             <AdminRoute
+              exact
               path="/admin"
               component={Admin}
+              isAuthenticated={this.props.isAuthenticated}
+              isAdmin={this.isAdmin(this.props.currentUser.role)}
+            />
+            <AdminRoute
+              path="/admin/collections"
+              component={AdminCollections}
               isAuthenticated={this.props.isAuthenticated}
               isAdmin={this.isAdmin(this.props.currentUser.role)}
             />

@@ -1,7 +1,8 @@
+import { Box, Column, Flex, Heading, Row, Text } from "rebass-emotion";
 import styled, { css } from "react-emotion";
 
+import { Link } from "react-router-dom";
 import React from "react";
-import { Text } from "rebass-emotion";
 import { fontSize } from "styled-system";
 
 const Container = styled("div")`margin: 0;`;
@@ -12,6 +13,7 @@ const Section = styled("section")`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   text-align: center;
   background-size: cover;
 
@@ -21,7 +23,7 @@ const Section = styled("section")`
   }
   :nth-of-type(2) {
     height: 200vh;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)),
       url("https://source.unsplash.com/1980x1020/?bark") no-repeat fixed;
@@ -55,6 +57,18 @@ export default () => (
         fontSize={6}
         children="Connaître, choisir et trouver des plantes..."
       />
+      <Row align="center">
+        <Column>
+          <Heading py={4} fontSize={[1, 2]} color="white" bg="blue">
+            Essayez
+          </Heading>
+        </Column>
+        <Column w={2 / 3} ml="auto">
+          <Link to={{ pathname: "/recherche", search: "q=Érable japonais" }}>
+            <Text>Érable japonais</Text>
+          </Link>
+        </Column>
+      </Row>
     </Section>
     <Section>
       <Caption
