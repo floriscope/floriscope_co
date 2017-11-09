@@ -128,7 +128,7 @@ class HeaderNavBar extends React.Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  user: state.auth.user.user,
+  user: state.auth.user,
   location: state.routing.location
 });
 

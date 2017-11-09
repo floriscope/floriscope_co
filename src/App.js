@@ -1,6 +1,7 @@
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 
 import About from "./containers/About";
+import Admin from "./containers/Admin";
 import Authentification from "./containers/Authentification";
 import Collection from "./containers/Collection";
 import Dashboard from "./containers/Dashboard";
@@ -14,10 +15,12 @@ import PrivateCollection from "./containers/PrivateCollection";
 import { Provider } from "rebass-emotion";
 import React from "react";
 import Search from "./containers/Search";
+import Unauthorized from "./containers/Unauthorized";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  currentUser: state.auth.user
 });
 
 const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
@@ -40,7 +43,39 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
   );
 };
 
+const AdminRoute = ({
+  component: Component,
+  isAuthenticated,
+  isAdmin,
+  ...rest
+}) => {
+  // const { authStatus } = rest;
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        isAuthenticated && isAdmin ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/unauthorized",
+              state: { from: props.location }
+            }}
+          />
+        )}
+    />
+  );
+};
+
 class App extends React.Component {
+  isAdmin = role => {
+    return role == "admin" ? true : false;
+  };
+  componentDidMount() {
+    console.log("AppDidMount/props", this.props);
+  }
+
   render() {
     return (
       <Provider
@@ -71,6 +106,13 @@ class App extends React.Component {
             />
             <Route path="/m/:uuid" component={Media} />
             <Route path="/recherche" component={Search} />
+            <AdminRoute
+              path="/admin"
+              component={Admin}
+              isAuthenticated={this.props.isAuthenticated}
+              isAdmin={this.isAdmin(this.props.currentUser.role)}
+            />
+            <Route path="/unauthorized" component={Unauthorized} />
             <Route component={NotFound} />
           </Switch>
         </div>

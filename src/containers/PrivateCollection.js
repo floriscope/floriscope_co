@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  user: state.auth.user.user
+  user: state.auth.user
 });
 
 class PrivateCollection extends React.Component {

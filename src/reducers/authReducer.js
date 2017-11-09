@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         user: action.user,
-        authToken: action.user.user.auth_token,
+        authToken: action.user.auth_token,
         isAuthenticated: true,
         isLoginIn: false,
         redirectToReferrer: true
@@ -50,7 +50,7 @@ export function login(credentials) {
   return async (dispatch, getState) => {
     try {
       const user = await authService.login(credentials);
-      dispatch({ type: "auth/TRY_LOGIN", user });
+      dispatch({ type: "auth/TRY_LOGIN" });
       dispatch({ type: "auth/LOGIN_IN", user });
       console.log("fetched user", user);
     } catch (error) {
