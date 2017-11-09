@@ -31,6 +31,23 @@ const UserNavLink = ({ user, logout }) => (
         </Dropdown.Item>
         <Dropdown.Item className={Dropdown_item}>Photothèque</Dropdown.Item>
         <Dropdown.Divider />
+        {user.role == "admin" ? <Dropdown.Header>ADMIN</Dropdown.Header> : null}
+        {user.role == "admin" ? (
+          <Dropdown.Item className={Dropdown_item}>
+            Gestion des plantes
+          </Dropdown.Item>
+        ) : null}
+        {user.role == "admin" ? (
+          <Dropdown.Item className={Dropdown_item}>
+            Gestion des collections
+          </Dropdown.Item>
+        ) : null}
+        {user.role == "admin" ? (
+          <Dropdown.Item className={Dropdown_item}>
+            Gestion de la photothèque
+          </Dropdown.Item>
+        ) : null}
+        {user.role == "admin" ? <Dropdown.Divider /> : null}
         <Dropdown.Header>MON COMPTE</Dropdown.Header>
         <Dropdown.Item className={Dropdown_item}>Paramètres</Dropdown.Item>
         <Dropdown.Item onClick={logout} className={Dropdown_item}>
@@ -109,10 +126,19 @@ class HeaderNavBar extends React.Component {
           <NavLink
             className={navLink_default}
             activeStyle={navLink_active}
-            to={{ pathname: "/recherche", search: "q=Poncirus trofoliata" }}
+            to={{ pathname: "/recherche", search: "q=Poncirus trifoliata" }}
           >
             Recherche "P. trifoliata"
           </NavLink>
+          {this.props.user.role == "admin" ? (
+            <NavLink
+              className={navLink_default}
+              activeStyle={navLink_active}
+              to={{ pathname: "/admin" }}
+            >
+              Espace admin
+            </NavLink>
+          ) : null}
           <Container />
           <AuthNav
             isAuthenticated={this.props.isAuthenticated}
