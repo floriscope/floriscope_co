@@ -49,12 +49,12 @@ const Caption = styled(Text)`
 export default () => (
   <Container>
     <Section>
-      <Caption center fontSize={7} bold children="Floriscope" />
+      <Caption center fontSize={11} bold children="Floriscope" />
     </Section>
     <Section>
       <Caption
         center
-        fontSize={6}
+        fontSize={10}
         children="Connaître, choisir et trouver des plantes..."
       />
       <Row align="center">
@@ -73,12 +73,12 @@ export default () => (
     <Section>
       <Caption
         center
-        fontSize={6}
+        fontSize={10}
         children="...pour les jardins et les aménagements paysagers"
       />
     </Section>
     <Section>
-      <Caption center fontSize={6} children="Nos partenaires..." />
+      <Caption center fontSize={10} children="Nos partenaires..." />
     </Section>
   </Container>
 );

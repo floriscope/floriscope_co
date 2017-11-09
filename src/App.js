@@ -20,6 +20,7 @@ import Unauthorized from "./containers/Unauthorized";
 import { connect } from "react-redux";
 import { persistStore } from "redux-persist";
 import store from "./store";
+import theme from "./assets/themes/rebassTheme";
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
@@ -94,13 +95,7 @@ class App extends React.Component {
       return <div style={{ color: "white", fontSize: "67px" }}>Loading...</div>;
     }
     return (
-      <Provider
-        theme={{
-          font:
-            '"Proxima Nova", "Brandon Grotesque", "Brandon Text", Helvetica, sans-serif',
-          fontSizes: [12, 16, 24, 36, 48, 72, 142, 200]
-        }}
-      >
+      <Provider theme={theme}>
         <div className="App">
           <HeaderNavBar bgc="rgba(2, 185, 147, 0.90)" />
           <Switch>
