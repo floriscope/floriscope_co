@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 const AdminHomeContainer = styled("div")`
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,7 +58,7 @@ const AdminLink = ({ link, title, color }) => (
 class Admin extends Component {
   render() {
     return (
-      <AdminHomeContainer>
+      <AdminHomeContainer style={{ height: "calc(100vh - 70px)" }}>
         <Caption
           center
           fontSize={[5, 6, 8]}
@@ -72,12 +71,12 @@ class Admin extends Component {
           color="green"
         />
         <AdminLink
-          link="/admin/collections"
+          link="/admin/phototheque"
           title="Gestion de la photothèque"
           color="yellow"
         />
         <AdminLink
-          link="/admin/collections"
+          link="/admin/taxonomie"
           title="Gestion des plantes"
           color="red"
         />

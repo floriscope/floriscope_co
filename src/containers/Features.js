@@ -23,7 +23,7 @@ const BackLink = styled(Link)`
   ${space} ${color} ${borderRadius} ${width};
 `;
 
-class AdminCollections extends Component {
+class Features extends Component {
   render() {
     return (
       <Container style={{ height: "calc(100vh - 70px)" }}>
@@ -37,7 +37,7 @@ class AdminCollections extends Component {
         <Flex>
           <Box w={1} px={2}>
             <BackLink
-              to="/admin"
+              to="/"
               width={[1, 1 / 2, 1 / 3]}
               m={2}
               color="white"
@@ -45,7 +45,7 @@ class AdminCollections extends Component {
               p={3}
               borderRadius={1}
             >
-              Retour à l'accueil admin
+              Retour à l'accueil
             </BackLink>
           </Box>
         </Flex>
@@ -54,4 +54,4 @@ class AdminCollections extends Component {
   }
 }
 
-export default AdminCollections;
+export default Features;

@@ -23,7 +23,7 @@ const BackLink = styled(Link)`
   ${space} ${color} ${borderRadius} ${width};
 `;
 
-class AdminCollections extends Component {
+class AdminImages extends Component {
   render() {
     return (
       <Container style={{ height: "calc(100vh - 70px)" }}>
@@ -54,4 +54,4 @@ class AdminCollections extends Component {
   }
 }
 
-export default AdminCollections;
+export default AdminImages;

@@ -17,7 +17,7 @@ const Dropdown_menu = cxs({
   left: "-20px !important"
 });
 
-const UserNavLink = ({ user, logout }) => (
+const UserNavLink = ({ user, logout, goTo }) => (
   <Container mx={4}>
     <Image avatar src={user.profile.avatar_url} />
     <Dropdown pointing text={user.email} className="link item">
@@ -34,17 +34,17 @@ const UserNavLink = ({ user, logout }) => (
         {user.role == "admin" ? <Dropdown.Header>ADMIN</Dropdown.Header> : null}
         {user.role == "admin" ? (
           <Dropdown.Item className={Dropdown_item}>
-            Gestion des plantes
+            <Link to="/admin/taxonomie">Gestion des plantes</Link>
           </Dropdown.Item>
         ) : null}
         {user.role == "admin" ? (
           <Dropdown.Item className={Dropdown_item}>
-            Gestion des collections
+            <Link to="/admin/collections">Gestion des collections</Link>
           </Dropdown.Item>
         ) : null}
         {user.role == "admin" ? (
           <Dropdown.Item className={Dropdown_item}>
-            Gestion de la photothèque
+            <Link to="/admin/phototheque">Gestion de la photothèque</Link>
           </Dropdown.Item>
         ) : null}
         {user.role == "admin" ? <Dropdown.Divider /> : null}
@@ -94,6 +94,7 @@ class HeaderNavBar extends React.Component {
   logout = () => {
     this.props.logout();
   };
+
   render() {
     return (
       <Headroom
@@ -119,17 +120,32 @@ class HeaderNavBar extends React.Component {
           <NavLink
             className={navLink_default}
             activeStyle={navLink_active}
-            to="/about-us"
+            to={{ pathname: "/recherche" }}
           >
-            À propos
+            Recherche
           </NavLink>
           <NavLink
             className={navLink_default}
             activeStyle={navLink_active}
-            to={{ pathname: "/recherche", search: "q=Poncirus trifoliata" }}
+            to="/fonctionnalites"
           >
-            Recherche "P. trifoliata"
+            Fonctionnalités
           </NavLink>
+          <NavLink
+            className={navLink_default}
+            activeStyle={navLink_active}
+            to="/abonnement"
+          >
+            Abonnement
+          </NavLink>
+          <a
+            target="_blank"
+            href="http://blog.floriscope.io"
+            className={navLink_default}
+          >
+            Blog
+          </a>
+
           {this.props.user.role == "admin" ? (
             <NavLink
               className={navLink_default}

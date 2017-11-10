@@ -3,15 +3,19 @@ import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import About from "./containers/About";
 import Admin from "./containers/Admin";
 import AdminCollections from "./containers/admin/AdminCollections";
+import AdminImages from "./containers/admin/AdminImages";
+import AdminTaxonomy from "./containers/admin/AdminTaxonomy";
 import Authentification from "./containers/Authentification";
 import Collection from "./containers/Collection";
 import Dashboard from "./containers/Dashboard";
+import Features from "./containers/Features";
 import HeaderNavBar from "./containers/HeaderNavBar";
 import Home from "./containers/Home";
 import Login from "./containers/auth/Login";
 import Media from "./containers/Media";
 import NotFound from "./components/NotFound";
 import Plante from "./containers/Plante";
+import Pricing from "./containers/Pricing";
 import PrivateCollection from "./containers/PrivateCollection";
 import { Provider } from "rebass-emotion";
 import React from "react";
@@ -102,7 +106,8 @@ class App extends React.Component {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/authentification" component={Authentification} />
-            <Route path="/about-us" component={About} />
+            <Route path="/fonctionnalites" component={Features} />
+            <Route path="/abonnement" component={Pricing} />
             <PrivateRoute
               path="/dashboard"
               component={Dashboard}
@@ -127,6 +132,18 @@ class App extends React.Component {
             <AdminRoute
               path="/admin/collections"
               component={AdminCollections}
+              isAuthenticated={this.props.isAuthenticated}
+              isAdmin={this.isAdmin(this.props.currentUser.role)}
+            />
+            <AdminRoute
+              path="/admin/phototheque"
+              component={AdminImages}
+              isAuthenticated={this.props.isAuthenticated}
+              isAdmin={this.isAdmin(this.props.currentUser.role)}
+            />
+            <AdminRoute
+              path="/admin/taxonomie"
+              component={AdminTaxonomy}
               isAuthenticated={this.props.isAuthenticated}
               isAdmin={this.isAdmin(this.props.currentUser.role)}
             />

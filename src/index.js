@@ -7,7 +7,6 @@ import { ApolloProvider } from "react-apollo";
 import App from "./App";
 import { ConnectedRouter } from "react-router-redux";
 import React from "react";
-import ReactDOM from "react-dom";
 import client from "./apollo";
 import { render } from "react-dom";
 
