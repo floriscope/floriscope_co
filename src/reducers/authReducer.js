@@ -5,6 +5,8 @@ const initialState = {
   isAuthenticated: false,
   user: {},
   authToken: undefined,
+  authentificationFailed: false,
+  errorMessage: "",
   redirectToReferrer: false
 };
 
@@ -12,6 +14,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case CLEAR_AUTH_ERRORS:
+      return {
+        ...state,
+        authentificationFailed: false,
+        errorMessage: ""
+      };
     case TRY_LOGIN:
       return {
         ...state,
@@ -19,7 +27,6 @@ export default (state = initialState, action) => {
         // isAuthenticated: true, // NEED TO WORKOFFLINE (TEMP)
         // redirectToReferrer: true // NEED TO WORKOFFLINE (TEMP)
       };
-
     case LOGIN_IN:
       return {
         ...state,
@@ -29,7 +36,12 @@ export default (state = initialState, action) => {
         isLoginIn: false,
         redirectToReferrer: true
       };
-
+    case AUTHENTIFICATION_FAILED:
+      return {
+        ...state,
+        authentificationFailed: true,
+        errorMessage: action.error.message
+      };
     case LOG_OUT:
       return {
         ...state,
@@ -49,17 +61,29 @@ export default (state = initialState, action) => {
 export function login(credentials) {
   return async (dispatch, getState) => {
     try {
-      const user = await authService.login(credentials);
+      const response = await authService.login(credentials);
       dispatch({ type: "auth/TRY_LOGIN" });
-      dispatch({ type: "auth/LOGIN_IN", user });
-      console.log("fetched user", user);
+      dispatch({ type: "auth/LOGIN_IN", user: response.user });
+      dispatch({
+        type: "auth/CLEAR_AUTH_ERRORS"
+      });
+      console.log("fetched user", response);
     } catch (error) {
       console.error(error);
+      dispatch({
+        type: "auth/AUTHENTIFICATION_FAILED",
+        error
+      });
     }
   };
 }
 
 // New actionCreator syntax
+export const clearAuthErrors = () => dispatch => {
+  dispatch({
+    type: "auth/CLEAR_AUTH_ERRORS"
+  });
+};
 
 export const logout = () => dispatch => {
   dispatch({
@@ -68,6 +92,8 @@ export const logout = () => dispatch => {
 };
 
 /* ACTIONS */
+export const CLEAR_AUTH_ERRORS = "auth/CLEAR_AUTH_ERRORS";
 export const TRY_LOGIN = "auth/TRY_LOGIN";
 export const LOGIN_IN = "auth/LOGIN_IN";
+export const AUTHENTIFICATION_FAILED = "auth/AUTHENTIFICATION_FAILED";
 export const LOG_OUT = "auth/LOG_OUT";

@@ -1,17 +1,19 @@
 import { Redirect, withRouter } from "react-router-dom";
+import { clearAuthErrors, login } from "../reducers/authReducer";
 
+import AuthFailed from "./auth/AuthFailed";
 import AuthForm from "./auth/AuthForm";
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { login } from "../reducers/authReducer";
 
 const styles = {
   layout: {
     height: "100vh",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    flexDirection: "column"
   },
   formContainer: {
     margin: 12,
@@ -28,13 +30,21 @@ const styles = {
 };
 const mapStateToProps = state => ({
   authStatus: state.auth.isAuthenticated,
-  redirectToReferrer: state.auth.redirectToReferrer
+  authentificationFailed: state.auth.authentificationFailed,
+  redirectToReferrer: state.auth.redirectToReferrer,
+  errorMessage: state.auth.errorMessage
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ login }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ login, clearAuthErrors }, dispatch);
 
 class AuthContainer extends React.Component {
   componentWillMount() {
+    // console.log(this.props);
+    this.props.clearAuthErrors();
+  }
+
+  componentDidMount() {
     // console.log(this.props);
   }
 
@@ -49,7 +59,11 @@ class AuthContainer extends React.Component {
   };
   render() {
     const { from } = this.props.location.state || { from: { pathname: "/" } };
-    const { redirectToReferrer } = this.props.redirectToReferrer;
+    const {
+      redirectToReferrer,
+      authentificationFailed,
+      errorMessage
+    } = this.props;
 
     if (this.props.redirectToReferrer) {
       return <Redirect to={from} />;
@@ -59,6 +73,9 @@ class AuthContainer extends React.Component {
         <div style={styles.formContainer}>
           <AuthForm onSubmit={this.submit} />
         </div>
+        {this.props.authentificationFailed ? (
+          <AuthFailed message={this.props.errorMessage} />
+        ) : null}
       </main>
     );
   }
