@@ -1,7 +1,11 @@
+import { Card, Container, Divider } from "rebass-emotion";
+
 import React from "react";
 
 export default () => (
-  <div>
-    <h1>Error 404 - Not Found</h1>
-  </div>
+  <Container>
+    <Card>
+      <div>ERROR 404 - NOT FOUND</div>
+    </Card>
+  </Container>
 );
