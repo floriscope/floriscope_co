@@ -11,7 +11,6 @@ import Dashboard from "./containers/Dashboard";
 import Features from "./containers/Features";
 import HeaderNavBar from "./containers/HeaderNavBar";
 import Home from "./containers/Home";
-import Login from "./containers/auth/Login";
 import Media from "./containers/Media";
 import NotFound from "./components/NotFound";
 import Plante from "./containers/Plante";
@@ -104,7 +103,6 @@ class App extends React.Component {
           <HeaderNavBar bgc="rgba(2, 185, 147, 0.90)" />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
             <Route path="/authentification" component={Authentification} />
             <Route path="/fonctionnalites" component={Features} />
             <Route path="/abonnement" component={Pricing} />

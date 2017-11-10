@@ -12,12 +12,10 @@ class AuthService {
       body: JSON.stringify(credentials)
     });
     if (!response.ok) {
-      throw new Error(
-        `AuthService Login failed, HTTP status ${response.status}`
-      );
+      throw new Error(`ÉCHEC DE CONNEXION:  ${response.errors.message}`);
     }
     const data = await response.json();
-    return data.user;
+    return data;
   }
 }
 
