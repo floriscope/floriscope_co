@@ -4,6 +4,10 @@ import { borderRadius, color, fontSize, space, width } from "styled-system";
 import styled, { css } from "react-emotion";
 
 import { Link } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { getCollections } from "../../reducers/adminCollectionsReducer";
+import { withRouter } from "react-router-dom";
 
 const Container = styled("section")`
   display: flex;
@@ -11,47 +15,40 @@ const Container = styled("section")`
   align-items: center;
   justify-content: space-evenly;
 `;
-const Disclaimer = styled(Heading)`
-  font-family: "Brandon Grotesque", Helvetica, sans-serif;
-  font-weight: 900;
-  ${color};
-`;
-const BackLink = styled(Link)`
-  height: auto;
-  text-transform: uppercase;
-  font: "Brandon Text", Helvetica, sans-serif;
-  ${space} ${color} ${borderRadius} ${width};
-`;
 
 class AdminCollections extends Component {
+  componentWillMount() {
+    this.props.getCollections(this.props.auth.authToken);
+  }
+  componentDidMount() {
+    console.log("AdminCollections/componentDidMount:PROPS", this.props);
+  }
   render() {
     return (
-      <Container style={{ height: "calc(100vh - 70px)" }}>
-        <Flex mx={-2}>
-          <Box w={1} px={2}>
-            <Disclaimer is="h1" color="white">
-              WORK IN PROGRESS...
-            </Disclaimer>
-          </Box>
-        </Flex>
-        <Flex>
-          <Box w={1} px={2}>
-            <BackLink
-              to="/admin"
-              width={[1, 1 / 2, 1 / 3]}
-              m={2}
-              color="white"
-              bg="grey"
-              p={3}
-              borderRadius={1}
-            >
-              Retour à l'accueil admin
-            </BackLink>
-          </Box>
-        </Flex>
+      <Container>
+        {this.props.collections.map(collection => {
+          return (
+            <div style={{ color: "white" }} key={collection.uuid}>
+              {collection.title}
+            </div>
+          );
+        })}
       </Container>
     );
   }
 }
 
-export default AdminCollections;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  routing: state.routing,
+  loadingCollections: state.adminCollections.allCollections.loading,
+  collections: state.adminCollections.allCollections.collections,
+  errorMessage: state.adminCollections.allCollections.error
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ getCollections }, dispatch);
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(AdminCollections)
+);

@@ -111,7 +111,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         allCollections: {
-          collections: action.collections,
+          collections: action.collections.collections,
+          meta: action.collections.meta,
           collectionsByIds: [],
           error: null,
           loading: false
