@@ -43,7 +43,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         activeCollection: {
-          collection: action.collection,
+          collection: action.payload.collection,
           error: null,
           loading: false
         }
@@ -155,16 +155,13 @@ export const clearState = () => dispatch => {
 export function getCollection(id, token) {
   return async (dispatch, getState) => {
     try {
-      const activeCollection = await adminCollectionService.getCollection(
-        id,
-        token
-      );
+      const payload = await adminCollectionService.getCollection(id, token);
       dispatch({ type: "adminCollections/FETCH_COLLECTION" });
       dispatch({
         type: "adminCollections/FETCH_COLLECTION_SUCCESS",
-        activeCollection
+        payload
       });
-      console.log("collection fetched", activeCollection);
+      console.log("collection fetched", payload);
     } catch (error) {
       console.error(error);
       dispatch({ type: "adminCollections/FETCH_COLLECTION_FAILURE", error });

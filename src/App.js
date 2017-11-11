@@ -2,6 +2,7 @@ import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 
 import About from "./containers/About";
 import Admin from "./containers/Admin";
+import AdminCollection from "./containers/admin/AdminCollection";
 import AdminCollections from "./containers/admin/AdminCollections";
 import AdminImages from "./containers/admin/AdminImages";
 import AdminTaxonomy from "./containers/admin/AdminTaxonomy";
@@ -128,8 +129,16 @@ class App extends React.Component {
               isAdmin={this.isAdmin(this.props.currentUser.role)}
             />
             <AdminRoute
+              exact
               path="/admin/collections"
               component={AdminCollections}
+              isAuthenticated={this.props.isAuthenticated}
+              isAdmin={this.isAdmin(this.props.currentUser.role)}
+            />
+            <AdminRoute
+              exact
+              path="/admin/c/:collectionId"
+              component={AdminCollection}
               isAuthenticated={this.props.isAuthenticated}
               isAdmin={this.isAdmin(this.props.currentUser.role)}
             />
