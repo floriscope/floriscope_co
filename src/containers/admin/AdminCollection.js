@@ -39,7 +39,7 @@ class AdminCollection extends Component {
             fontSize: "34px"
           }}
         >
-          {this.props.collection
+          {this.props.loadingCollection
             ? this.props.collection.title
             : "Loading collection"}
         </div>
