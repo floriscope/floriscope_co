@@ -31,23 +31,25 @@ const UserNavLink = ({ user, logout, goTo }) => (
         </Dropdown.Item>
         <Dropdown.Item className={Dropdown_item}>Photothèque</Dropdown.Item>
         <Dropdown.Divider />
-        {user.role == "admin" ? <Dropdown.Header>ADMIN</Dropdown.Header> : null}
-        {user.role == "admin" ? (
+        {user.role === "admin" ? (
+          <Dropdown.Header>ADMIN</Dropdown.Header>
+        ) : null}
+        {user.role === "admin" ? (
           <Dropdown.Item className={Dropdown_item}>
             <Link to="/admin/taxonomie">Gestion des plantes</Link>
           </Dropdown.Item>
         ) : null}
-        {user.role == "admin" ? (
+        {user.role === "admin" ? (
           <Dropdown.Item className={Dropdown_item}>
             <Link to="/admin/collections">Gestion des collections</Link>
           </Dropdown.Item>
         ) : null}
-        {user.role == "admin" ? (
+        {user.role === "admin" ? (
           <Dropdown.Item className={Dropdown_item}>
             <Link to="/admin/phototheque">Gestion de la photothèque</Link>
           </Dropdown.Item>
         ) : null}
-        {user.role == "admin" ? <Dropdown.Divider /> : null}
+        {user.role === "admin" ? <Dropdown.Divider /> : null}
         <Dropdown.Header>MON COMPTE</Dropdown.Header>
         <Dropdown.Item className={Dropdown_item}>Paramètres</Dropdown.Item>
         <Dropdown.Item onClick={logout} className={Dropdown_item}>
@@ -146,7 +148,7 @@ class HeaderNavBar extends React.Component {
             Blog
           </a>
 
-          {this.props.user.role == "admin" ? (
+          {this.props.user.role === "admin" ? (
             <NavLink
               className={navLink_default}
               activeStyle={navLink_active}

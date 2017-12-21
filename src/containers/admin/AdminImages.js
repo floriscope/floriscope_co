@@ -1,20 +1,11 @@
 import "../../assets/styles/InstantSearchTheme@4.0.css";
 
-import {
-  BackgroundImage,
-  Box,
-  Card,
-  Flex,
-  Heading,
-  Subhead,
-  Text
-} from "rebass-emotion";
+import { BackgroundImage, Card, Heading, Subhead, Text } from "rebass-emotion";
 import {
   Highlight,
   Hits,
   InstantSearch,
   Pagination,
-  Panel,
   RefinementList,
   SearchBox,
   SortBy,
@@ -22,38 +13,19 @@ import {
   Toggle
 } from "react-instantsearch/dom";
 import React, { Component } from "react";
-import { borderRadius, color, fontSize, space, width } from "styled-system";
-import styled, { css } from "react-emotion";
+import { borderRadius, color, space, width } from "styled-system";
 
 import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { changeSearchState } from "../../reducers/adminImagesReducer";
 import { connect } from "react-redux";
 import { orderBy } from "lodash";
+import styled from "react-emotion";
 import { withRouter } from "react-router-dom";
-
-const Container = styled("section")`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-`;
-const Disclaimer = styled(Heading)`
-  font-family: "Brandon Grotesque", Helvetica, sans-serif;
-  font-weight: 900;
-  ${color};
-`;
-const BackLink = styled(Link)`
-  height: auto;
-  text-transform: uppercase;
-  font: "Brandon Text", Helvetica, sans-serif;
-  ${space} ${color} ${borderRadius} ${width};
-`;
 
 const SearchContainer = styled("div")`
   padding: 0 64px 6px 64px;
   overflow: hidden;
-
   height: 100vh;
   width: 100%;
   display: grid;
@@ -71,18 +43,18 @@ const Header = styled("header")`
   padding: 24px 0;
 `;
 const Aside = styled("aside")`
-overflow: auto;
-height: auto;
-padding: .5rem;
--webkit-overflow-scrolling: touch;
--ms-overflow-style: none;
-grid-area: aside
-postion: relative;
-width: auto;
-margin-bottom: 52px;
-&::-webkit-scrollbar {
-  display: none;
-}
+  overflow: auto;
+  height: auto;
+  padding: .5rem;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  grid-area: aside
+  postion: relative;
+  width: auto;
+  margin-bottom: 52px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const Main = styled("main")`
   overflow: auto;

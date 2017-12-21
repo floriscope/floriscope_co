@@ -1,6 +1,5 @@
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 
-import About from "./containers/About";
 import Admin from "./containers/Admin";
 import AdminCollection from "./containers/admin/AdminCollection";
 import AdminCollections from "./containers/admin/AdminCollections";
@@ -85,7 +84,7 @@ class App extends React.Component {
   }
 
   isAdmin = role => {
-    return role == "admin" ? true : false;
+    return role === "admin" ? true : false;
   };
   componentWillMount() {
     persistStore(store, {}, () => {

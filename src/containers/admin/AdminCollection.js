@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import styled, { css } from "react-emotion";
 
-import WIP from "../../components/WIP";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { getCollection } from "../../reducers/adminCollectionsReducer";
+import styled from "react-emotion";
 import { withRouter } from "react-router-dom";
 
 const Container = styled("main")`

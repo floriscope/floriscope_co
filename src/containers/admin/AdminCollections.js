@@ -1,20 +1,12 @@
-import { Box, Card, Flex, Heading } from "rebass-emotion";
-import { Link, Route } from "react-router-dom";
 import React, { Component } from "react";
-import {
-  borderRadius,
-  borderWidth,
-  color,
-  fontSize,
-  space,
-  width
-} from "styled-system";
-import styled, { css } from "react-emotion";
+import { borderRadius, borderWidth, color, space, width } from "styled-system";
 
 import HeaderSearchBox from "../../components/admin/HeaderSearchBox";
+import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { getCollections } from "../../reducers/adminCollectionsReducer";
+import styled from "react-emotion";
 import { withRouter } from "react-router-dom";
 
 const Container = styled("section")`

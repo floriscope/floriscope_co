@@ -1,9 +1,9 @@
 import { Box, Flex, Heading } from "rebass-emotion";
 import React, { Component } from "react";
-import { borderRadius, color, fontSize, space, width } from "styled-system";
-import styled, { css } from "react-emotion";
+import { borderRadius, color, space, width } from "styled-system";
 
 import { Link } from "react-router-dom";
+import styled from "react-emotion";
 
 const Container = styled("section")`
   display: flex;
