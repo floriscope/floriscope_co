@@ -124,7 +124,7 @@ const Hit = ({ hit }) => (
       {hit.matched_taxa ? (
         <Link
           to={{
-            pathname: `/plante/${hit.slug}`,
+            pathname: `/admin/i/${hit.id}`,
             state: { currentPlante: hit }
           }}
         >

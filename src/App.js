@@ -46,7 +46,8 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
               state: { from: props.location }
             }}
           />
-        )}
+        )
+      }
     />
   );
 };
@@ -71,7 +72,8 @@ const AdminRoute = ({
               state: { from: props.location }
             }}
           />
-        )}
+        )
+      }
     />
   );
 };
@@ -145,6 +147,13 @@ class App extends React.Component {
             <AdminRoute
               path="/admin/phototheque"
               component={AdminImages}
+              isAuthenticated={this.props.isAuthenticated}
+              isAdmin={this.isAdmin(this.props.currentUser.role)}
+            />
+            <AdminRoute
+              exact
+              path="/admin/i/:imageId"
+              component={AdminCollection}
               isAuthenticated={this.props.isAuthenticated}
               isAdmin={this.isAdmin(this.props.currentUser.role)}
             />
