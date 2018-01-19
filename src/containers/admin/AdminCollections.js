@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { borderRadius, borderWidth, color, space, width } from "styled-system";
 
+import AnimatedWrapper from "../AnimatedWrapper";
 import HeaderSearchBox from "../../components/admin/HeaderSearchBox";
 import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";

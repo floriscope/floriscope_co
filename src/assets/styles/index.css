@@ -8,7 +8,7 @@ Orange #F17959 ;  */
 
 /* PROXIMA NOVA FONT_FACE */
 /* BRANDON GROTESQUE FONT_FACE */
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
 
 @font-face {
   font-family: "Proxima Nova";
@@ -234,5 +234,10 @@ body {
   box-sizing: border-box;
 }
 
-.Home {
+.switch-wrapper {
+  position: relative;
+}
+
+.switch-wrapper > div {
+  position: absolute;
 }

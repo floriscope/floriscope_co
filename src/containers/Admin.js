@@ -1,7 +1,8 @@
 import { Box, Flex, Text } from "rebass-emotion";
 import React, { Component } from "react";
-import { borderRadius, color, fontSize, space, width } from "styled-system";
+import { borderradius, color, fontSize, space, width } from "styled-system";
 
+import AnimatedWrapper from "./AnimatedWrapper";
 import HeaderNavBar from "./HeaderNavBar";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -22,7 +23,7 @@ const StyledLink = styled(Link)`
   height: auto;
   text-transform: uppercase;
   font: "Brandon Grotesque", "Brandon Text", Helvetica, sans-serif;
-  ${space} ${color} ${borderRadius} ${width};
+  ${space} ${color} ${borderradius} ${width};
 `;
 
 const Caption = styled(Text)`
@@ -41,7 +42,7 @@ const AdminLink = ({ link, title, color }) => (
     color="white"
     bg={color}
     p={3}
-    borderRadius={1}
+    borderradius={1}
   >
     <Flex mx={-2}>
       <Box w={9 / 10} px={2}>
