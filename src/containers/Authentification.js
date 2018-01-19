@@ -4,6 +4,7 @@ import styled, { css } from "react-emotion";
 
 import AuthFailed from "./auth/AuthFailed";
 import AuthForm from "./auth/AuthForm";
+import HeaderNavBar from "./HeaderNavBar";
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -69,6 +70,7 @@ class Authentification extends React.Component {
     }
     return (
       <AuthContainer style={{ height: "calc(100vh - 70px)" }}>
+        <HeaderNavBar bgc="rgba(2, 185, 147, 0.90)" />
         <div style={styles.formContainer}>
           <AuthForm onSubmit={this.submit} />
         </div>

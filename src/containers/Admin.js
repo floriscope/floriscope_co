@@ -2,9 +2,14 @@ import { Box, Flex, Text } from "rebass-emotion";
 import React, { Component } from "react";
 import { borderRadius, color, fontSize, space, width } from "styled-system";
 
+import HeaderNavBar from "./HeaderNavBar";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "react-emotion";
+
+const Wrapper = styled("main")`
+  width: 100vw;
+`;
 
 const AdminHomeContainer = styled("div")`
   display: flex;
@@ -58,29 +63,32 @@ const AdminLink = ({ link, title, color }) => (
 class Admin extends Component {
   render() {
     return (
-      <AdminHomeContainer style={{ height: "calc(100vh - 70px)" }}>
-        <Caption
-          center
-          fontSize={[5, 6, 8]}
-          bold
-          children="Le changement c'est maintenant!"
-        />
-        <AdminLink
-          link="/admin/collections"
-          title="Gestion des collections"
-          color="green"
-        />
-        <AdminLink
-          link="/admin/phototheque"
-          title="Gestion de la photothèque"
-          color="yellow"
-        />
-        <AdminLink
-          link="/admin/taxonomie"
-          title="Gestion des plantes"
-          color="red"
-        />
-      </AdminHomeContainer>
+      <Wrapper>
+        <HeaderNavBar bgc="rgba(2, 185, 147, 0.90)" />
+        <AdminHomeContainer style={{ height: "calc(100vh - 70px)" }}>
+          <Caption
+            center
+            fontSize={[5, 6, 8]}
+            bold
+            children="Le changement c'est maintenant!"
+          />
+          <AdminLink
+            link="/admin/collections"
+            title="Gestion des collections"
+            color="green"
+          />
+          <AdminLink
+            link="/admin/phototheque"
+            title="Gestion de la photothèque"
+            color="yellow"
+          />
+          <AdminLink
+            link="/admin/taxonomie"
+            title="Gestion des plantes"
+            color="red"
+          />
+        </AdminHomeContainer>
+      </Wrapper>
     );
   }
 }

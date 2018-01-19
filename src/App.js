@@ -11,7 +11,6 @@ import Authentification from "./containers/Authentification";
 import Collection from "./containers/Collection";
 import Dashboard from "./containers/Dashboard";
 import Features from "./containers/Features";
-import HeaderNavBar from "./containers/HeaderNavBar";
 import Home from "./containers/Home";
 import Media from "./containers/Media";
 import NotFound from "./components/NotFound";
@@ -104,7 +103,6 @@ class App extends React.Component {
     return (
       <Provider theme={theme}>
         <div className="App">
-          <HeaderNavBar bgc="rgba(2, 185, 147, 0.90)" />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/authentification" component={Authentification} />
