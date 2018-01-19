@@ -190,7 +190,7 @@ class AdminImages extends Component {
                   label: "Les plus pertinentes",
                   value: "vegebaseIllustrations_ADMIN"
                 },
-                { label: "A-Z", value: "vegebaseIllustrations_ADMIN" }
+                { label: "A-Z", value: "vegebaseIllustrations_ADMIN_taxaDesc" }
               ]}
             />
           </SortByWrapper>

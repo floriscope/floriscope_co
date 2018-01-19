@@ -1,13 +1,14 @@
 /* App Color Palette
-Green #14B9AB ; 
-Gray #616261 ; 
-Yellow #FECF5B ; 
-Light Gray #DFD7D8 ; 
-Secondary #7DCCDF ; 
+Green #14B9AB ;
+Gray #616261 ;
+Yellow #FECF5B ;
+Light Gray #DFD7D8 ;
+Secondary #7DCCDF ;
 Orange #F17959 ;  */
 
 /* PROXIMA NOVA FONT_FACE */
 /* BRANDON GROTESQUE FONT_FACE */
+@import '~antd/dist/antd.css';
 
 @font-face {
   font-family: "Proxima Nova";

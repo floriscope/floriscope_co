@@ -3,6 +3,8 @@ import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import Admin from "./containers/Admin";
 import AdminCollection from "./containers/admin/AdminCollection";
 import AdminCollections from "./containers/admin/AdminCollections";
+import AdminImage from "./containers/admin/AdminImage";
+import AdminImageEdit from "./containers/admin/AdminImageEdit";
 import AdminImages from "./containers/admin/AdminImages";
 import AdminTaxonomy from "./containers/admin/AdminTaxonomy";
 import Authentification from "./containers/Authentification";
@@ -152,7 +154,14 @@ class App extends React.Component {
             <AdminRoute
               exact
               path="/admin/i/:imageId"
-              component={AdminCollection}
+              component={AdminImage}
+              isAuthenticated={this.props.isAuthenticated}
+              isAdmin={this.isAdmin(this.props.currentUser.role)}
+            />
+            <AdminRoute
+              exact
+              path="/admin/i/:imageId/modifier"
+              component={AdminImageEdit}
               isAuthenticated={this.props.isAuthenticated}
               isAdmin={this.isAdmin(this.props.currentUser.role)}
             />
