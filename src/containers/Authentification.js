@@ -1,15 +1,17 @@
 import { Redirect, withRouter } from "react-router-dom";
 import { clearAuthErrors, login } from "../reducers/authReducer";
+import styled, { css } from "react-emotion";
 
 import AuthFailed from "./auth/AuthFailed";
 import AuthForm from "./auth/AuthForm";
+import HeaderNavBar from "./HeaderNavBar";
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 const styles = {
   layout: {
-    height: "100vh",
+    height: "calc (100vh - 70px)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -28,17 +30,15 @@ const styles = {
     marginBottom: 12
   }
 };
-const mapStateToProps = state => ({
-  authStatus: state.auth.isAuthenticated,
-  authentificationFailed: state.auth.authentificationFailed,
-  redirectToReferrer: state.auth.redirectToReferrer,
-  errorMessage: state.auth.errorMessage
-});
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ login, clearAuthErrors }, dispatch);
+const AuthContainer = styled("main")`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
 
-class AuthContainer extends React.Component {
+class Authentification extends React.Component {
   componentWillMount() {
     // console.log(this.props);
     this.props.clearAuthErrors();
@@ -69,18 +69,29 @@ class AuthContainer extends React.Component {
       return <Redirect to={from} />;
     }
     return (
-      <main style={styles.layout}>
+      <AuthContainer style={{ height: "calc(100vh - 70px)" }}>
+        <HeaderNavBar bgc="rgba(2, 185, 147, 0.90)" />
         <div style={styles.formContainer}>
           <AuthForm onSubmit={this.submit} />
         </div>
         {this.props.authentificationFailed ? (
           <AuthFailed message={this.props.errorMessage} />
         ) : null}
-      </main>
+      </AuthContainer>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  authStatus: state.auth.isAuthenticated,
+  authentificationFailed: state.auth.authentificationFailed,
+  redirectToReferrer: state.auth.redirectToReferrer,
+  errorMessage: state.auth.errorMessage
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ login, clearAuthErrors }, dispatch);
+
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(AuthContainer)
+  connect(mapStateToProps, mapDispatchToProps)(Authentification)
 );

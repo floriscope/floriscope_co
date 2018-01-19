@@ -3,7 +3,12 @@ import React, { Component } from "react";
 import { borderRadius, color, fontSize, space, width } from "styled-system";
 import styled, { css } from "react-emotion";
 
+import HeaderNavBar from "./HeaderNavBar";
 import { Link } from "react-router-dom";
+
+const Wrapper = styled("main")`
+  width: 100vw;
+`;
 
 const Container = styled("section")`
   display: flex;
@@ -26,30 +31,33 @@ const BackLink = styled(Link)`
 class Princing extends Component {
   render() {
     return (
-      <Container style={{ height: "calc(100vh - 70px)" }}>
-        <Flex mx={-2}>
-          <Box w={1} px={2}>
-            <Disclaimer is="h1" color="white">
-              WORK IN PROGRESS...
-            </Disclaimer>
-          </Box>
-        </Flex>
-        <Flex>
-          <Box w={1} px={2}>
-            <BackLink
-              to="/"
-              width={[1, 1 / 2, 1 / 3]}
-              m={2}
-              color="white"
-              bg="grey"
-              p={3}
-              borderRadius={1}
-            >
-              Retour à l'accueil
-            </BackLink>
-          </Box>
-        </Flex>
-      </Container>
+      <Wrapper>
+        <HeaderNavBar bgc="rgba(2, 185, 147, 0.90)" />
+        <Container style={{ height: "calc(100vh - 70px)" }}>
+          <Flex mx={-2}>
+            <Box w={1} px={2}>
+              <Disclaimer is="h1" color="white">
+                WORK IN PROGRESS...
+              </Disclaimer>
+            </Box>
+          </Flex>
+          <Flex>
+            <Box w={1} px={2}>
+              <BackLink
+                to="/"
+                width={[1, 1 / 2, 1 / 3]}
+                m={2}
+                color="white"
+                bg="grey"
+                p={3}
+                borderRadius={1}
+              >
+                Retour à l'accueil
+              </BackLink>
+            </Box>
+          </Flex>
+        </Container>
+      </Wrapper>
     );
   }
 }

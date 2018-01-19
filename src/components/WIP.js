@@ -1,9 +1,9 @@
 import { Box, Flex, Heading } from "rebass-emotion";
 import React, { Component } from "react";
-import { borderRadius, color, space, width } from "styled-system";
+import { borderRadius, color, fontSize, space, width } from "styled-system";
+import styled, { css } from "react-emotion";
 
 import { Link } from "react-router-dom";
-import styled from "react-emotion";
 
 const Container = styled("section")`
   display: flex;
@@ -23,7 +23,7 @@ const BackLink = styled(Link)`
   ${space} ${color} ${borderRadius} ${width};
 `;
 
-class AdminTaxonomy extends Component {
+class WIP extends Component {
   render() {
     return (
       <Container style={{ height: "calc(100vh - 70px)" }}>
@@ -54,4 +54,4 @@ class AdminTaxonomy extends Component {
   }
 }
 
-export default AdminTaxonomy;
+export default WIP;

@@ -1,11 +1,14 @@
 import { Box, Column, Flex, Heading, Row, Text } from "rebass-emotion";
 import styled, { css } from "react-emotion";
 
+import HeaderNavBar from "./HeaderNavBar";
 import { Link } from "react-router-dom";
 import React from "react";
 import { fontSize } from "styled-system";
 
-const Container = styled("div")`margin: 0;`;
+const Container = styled("div")`
+  margin: 0;
+`;
 
 const Section = styled("section")`
   width: 100vw;
@@ -48,6 +51,7 @@ const Caption = styled(Text)`
 
 export default () => (
   <Container>
+    <HeaderNavBar bgc="rgba(2, 185, 147, 0.90)" />
     <Section>
       <Caption center fontSize={11} bold children="Floriscope" />
     </Section>

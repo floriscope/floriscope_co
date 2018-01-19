@@ -1,3 +1,5 @@
+import adminCollectionsReducer from "./adminCollectionsReducer";
+import adminImagesReducer from "./adminImagesReducer";
 import apolloClient from "../apollo";
 import authReducer from "./authReducer";
 import { combineReducers } from "redux";
@@ -14,5 +16,7 @@ export default combineReducers({
   form: formReducer,
   search: searchReducer,
   plante: planteReducer,
+  adminCollections: adminCollectionsReducer,
+  adminImages: adminImagesReducer,
   apollo: apolloClient.reducer()
 });

@@ -1,15 +1,18 @@
+import { AnimatedRoute, AnimatedSwitch } from "react-router-transition";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 
-import About from "./containers/About";
 import Admin from "./containers/Admin";
+import AdminCollection from "./containers/admin/AdminCollection";
 import AdminCollections from "./containers/admin/AdminCollections";
+import AdminImage from "./containers/admin/AdminImage";
+import AdminImageEdit from "./containers/admin/AdminImageEdit";
 import AdminImages from "./containers/admin/AdminImages";
 import AdminTaxonomy from "./containers/admin/AdminTaxonomy";
 import Authentification from "./containers/Authentification";
 import Collection from "./containers/Collection";
 import Dashboard from "./containers/Dashboard";
 import Features from "./containers/Features";
-import HeaderNavBar from "./containers/HeaderNavBar";
 import Home from "./containers/Home";
 import Media from "./containers/Media";
 import NotFound from "./components/NotFound";
@@ -21,14 +24,11 @@ import React from "react";
 import Search from "./containers/Search";
 import Unauthorized from "./containers/Unauthorized";
 import { connect } from "react-redux";
+import { css } from "emotion";
 import { persistStore } from "redux-persist";
+import { spring } from "react-motion";
 import store from "./store";
 import theme from "./assets/themes/rebassTheme";
-
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  currentUser: state.auth.user
-});
 
 const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
   // const { authStatus } = rest;
@@ -45,7 +45,8 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
               state: { from: props.location }
             }}
           />
-        )}
+        )
+      }
     />
   );
 };
@@ -70,9 +71,97 @@ const AdminRoute = ({
               state: { from: props.location }
             }}
           />
-        )}
+        )
+      }
     />
   );
+};
+
+function mapStyles(styles) {
+  return {
+    opacity: styles.opacity,
+    transform: `scale(${styles.scale})`
+  };
+}
+
+// wrap the `spring` helper to use a bouncy config
+function bounce(val) {
+  return spring(val, {
+    stiffness: 330,
+    damping: 22
+  });
+}
+
+// child matches will...
+const bounceTransition = {
+  // start in a transparent, upscaled state
+  atEnter: {
+    opacity: 0,
+    scale: 1.2
+  },
+  // leave in a transparent, downscaled state
+  atLeave: {
+    opacity: bounce(0),
+    scale: bounce(0.8)
+  },
+  // and rest at an opaque, normally-scaled state
+  atActive: {
+    opacity: bounce(1),
+    scale: bounce(1)
+  }
+};
+
+const switchRule = css`
+  position: relative;
+  & > div {
+    position: absolute;
+  }
+`;
+
+const routeRule = css`
+  position: relative;
+  & > div {
+    position: absolute;
+    width: 100%;
+  }
+`;
+
+function glide(val) {
+  return spring(val, {
+    stiffness: 174,
+    damping: 24
+  });
+}
+
+function slide(val) {
+  return spring(val, {
+    stiffness: 125,
+    damping: 16
+  });
+}
+
+const pageTransitions = {
+  atEnter: {
+    offset: -100
+  },
+  atLeave: {
+    offset: glide(-100)
+  },
+  atActive: {
+    offset: glide(0)
+  }
+};
+
+const topBarTransitions = {
+  atEnter: {
+    offset: -100
+  },
+  atLeave: {
+    offset: slide(-150)
+  },
+  atActive: {
+    offset: slide(0)
+  }
 };
 
 class App extends React.Component {
@@ -82,7 +171,7 @@ class App extends React.Component {
   }
 
   isAdmin = role => {
-    return role == "admin" ? true : false;
+    return role === "admin" ? true : false;
   };
   componentWillMount() {
     persistStore(store, {}, () => {
@@ -100,8 +189,13 @@ class App extends React.Component {
     return (
       <Provider theme={theme}>
         <div className="App">
-          <HeaderNavBar bgc="rgba(2, 185, 147, 0.90)" />
-          <Switch>
+          <AnimatedSwitch
+            atEnter={bounceTransition.atEnter}
+            atLeave={bounceTransition.atLeave}
+            atActive={bounceTransition.atActive}
+            mapStyles={mapStyles}
+            className="route-wrapper"
+          >
             <Route exact path="/" component={Home} />
             <Route path="/authentification" component={Authentification} />
             <Route path="/fonctionnalites" component={Features} />
@@ -120,6 +214,7 @@ class App extends React.Component {
             />
             <Route path="/m/:uuid" component={Media} />
             <Route path="/recherche" component={Search} />
+
             <AdminRoute
               exact
               path="/admin"
@@ -127,15 +222,56 @@ class App extends React.Component {
               isAuthenticated={this.props.isAuthenticated}
               isAdmin={this.isAdmin(this.props.currentUser.role)}
             />
+            <Route
+              render={({ location }) => (
+                <div>
+                  <AnimatedSwitch
+                    css={switchRule}
+                    {...pageTransitions}
+                    runOnMount={location.pathname === "/admin/collections"}
+                    mapStyles={styles => ({
+                      transform: `translateY(${styles.offset}%)`
+                    })}
+                  >
+                    <AdminRoute
+                      exact
+                      path="/admin/collections"
+                      component={AdminCollections}
+                      isAuthenticated={this.props.isAuthenticated}
+                      isAdmin={this.isAdmin(this.props.currentUser.role)}
+                    />
+                    <AnimatedRoute
+                      path="/admin/c/:collectionId"
+                      component={AdminCollection}
+                      atEnter={{ offset: -100 }}
+                      atLeave={{ offset: -100 }}
+                      atActive={{ offset: 0 }}
+                      mapStyles={styles => ({
+                        transform: `translateY(${styles.offset}%)`
+                      })}
+                    />
+                  </AnimatedSwitch>
+                </div>
+              )}
+            />
+
             <AdminRoute
-              path="/admin/collections"
-              component={AdminCollections}
+              path="/admin/phototheque"
+              component={AdminImages}
               isAuthenticated={this.props.isAuthenticated}
               isAdmin={this.isAdmin(this.props.currentUser.role)}
             />
             <AdminRoute
-              path="/admin/phototheque"
-              component={AdminImages}
+              exact
+              path="/admin/i/:imageId"
+              component={AdminImage}
+              isAuthenticated={this.props.isAuthenticated}
+              isAdmin={this.isAdmin(this.props.currentUser.role)}
+            />
+            <AdminRoute
+              exact
+              path="/admin/i/:imageId/modifier"
+              component={AdminImageEdit}
               isAuthenticated={this.props.isAuthenticated}
               isAdmin={this.isAdmin(this.props.currentUser.role)}
             />
@@ -145,12 +281,19 @@ class App extends React.Component {
               isAuthenticated={this.props.isAuthenticated}
               isAdmin={this.isAdmin(this.props.currentUser.role)}
             />
+
             <Route path="/unauthorized" component={Unauthorized} />
             <Route component={NotFound} />
-          </Switch>
+          </AnimatedSwitch>
         </div>
       </Provider>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  currentUser: state.auth.user
+});
+
 export default withRouter(connect(mapStateToProps, null)(App));

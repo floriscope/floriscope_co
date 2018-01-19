@@ -11,20 +11,25 @@ import {
   SortBy,
   Stats
 } from "react-instantsearch/dom";
-import { autoRehydrate, persistStore } from "redux-persist";
-import styled, { css } from "react-emotion";
 
+import HeaderNavBar from "./HeaderNavBar";
 import { Link } from "react-router-dom";
 import React from "react";
 import { bindActionCreators } from "redux";
 import { changeSearchState } from "../reducers/searchReducer";
 import { connect } from "react-redux";
+// import { autoRehydrate, persistStore } from "redux-persist";
+import styled from "react-emotion";
 import { withRouter } from "react-router-dom";
 
 // @fixme add media-query for SearchContainer
 // @fixme aside and main scrolling bug on Safari
 //  possible fix = going back to display: flex
 //  inspiration here: https://webdesign.tutsplus.com/tutorials/how-to-make-responsive-scrollable-panels-with-flexbox--cms-23269
+
+const Wrapper = styled("main")`
+  width: 100vw;
+`;
 
 const SearchContainer = styled("div")`
   padding: 0 64px 6px 64px;
@@ -74,7 +79,9 @@ const Main = styled("main")`
   }
 `;
 
-const StatsWrapper = styled("div")`grid-area: stats;`;
+const StatsWrapper = styled("div")`
+  grid-area: stats;
+`;
 const SortByWrapper = styled("div")`
   grid-area: sort;
   display: flex;
@@ -141,7 +148,7 @@ class Search extends React.Component {
     }
   }
   componentWillUpdate(nextProps, nextState) {
-    if (nextProps.location != this.props.location) {
+    if (nextProps.location !== this.props.location) {
       console.log("Location will change!");
     }
   }
@@ -154,31 +161,34 @@ class Search extends React.Component {
         searchState={this.props.searchState}
         onSearchStateChange={state => this.props.changeSearchState(state)}
       >
-        <SearchContainer>
-          <Header>
-            <SearchBox
-              translations={{ placeholder: "Rerchercher des plantes..." }}
-            />
-          </Header>
-          <StatsWrapper>
-            <Stats />
-          </StatsWrapper>
-          <SortByWrapper>
-            <SortBy
-              defaultRefinement="vegebasePlantes"
-              items={[
-                { label: "Les plus documentées", value: "vegebasePlantes" },
-                { label: "A-Z", value: "vegebasePlante_taxonDesc" }
-              ]}
-            />
-          </SortByWrapper>
-          <Aside>
-            <Sidebar />
-          </Aside>
-          <Main>
-            <Content />
-          </Main>
-        </SearchContainer>
+        <Wrapper>
+          <HeaderNavBar bgc="rgba(2, 185, 147, 0.90)" />
+          <SearchContainer>
+            <Header>
+              <SearchBox
+                translations={{ placeholder: "Rerchercher des plantes..." }}
+              />
+            </Header>
+            <StatsWrapper>
+              <Stats />
+            </StatsWrapper>
+            <SortByWrapper>
+              <SortBy
+                defaultRefinement="vegebasePlantes"
+                items={[
+                  { label: "Les plus documentées", value: "vegebasePlantes" },
+                  { label: "A-Z", value: "vegebasePlante_taxonDesc" }
+                ]}
+              />
+            </SortByWrapper>
+            <Aside>
+              <Sidebar />
+            </Aside>
+            <Main>
+              <Content />
+            </Main>
+          </SearchContainer>
+        </Wrapper>
       </InstantSearch>
     );
   }

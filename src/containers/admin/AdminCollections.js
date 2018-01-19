@@ -1,9 +1,14 @@
-import { Box, Flex, Heading } from "rebass-emotion";
 import React, { Component } from "react";
-import { borderRadius, color, fontSize, space, width } from "styled-system";
-import styled, { css } from "react-emotion";
+import { borderRadius, borderWidth, color, space, width } from "styled-system";
 
+import AnimatedWrapper from "../AnimatedWrapper";
+import HeaderSearchBox from "../../components/admin/HeaderSearchBox";
 import { Link } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { getCollections } from "../../reducers/adminCollectionsReducer";
+import styled from "react-emotion";
+import { withRouter } from "react-router-dom";
 
 const Container = styled("section")`
   display: flex;
@@ -11,47 +16,68 @@ const Container = styled("section")`
   align-items: center;
   justify-content: space-evenly;
 `;
-const Disclaimer = styled(Heading)`
-  font-family: "Brandon Grotesque", Helvetica, sans-serif;
-  font-weight: 900;
-  ${color};
+
+const ListWrapper = styled("div")`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 `;
-const BackLink = styled(Link)`
+const ItemWrapper = styled("div")`
   height: auto;
-  text-transform: uppercase;
-  font: "Brandon Text", Helvetica, sans-serif;
-  ${space} ${color} ${borderRadius} ${width};
+
+  ${width} ${space} ${borderWidth} ${borderRadius} ${color};
 `;
 
+const CollectionsList = ({ children, style, ...props }) => {
+  return (
+    <ListWrapper>
+      {props.items.map(item => {
+        return <CollectionItem key={item.uuid} item={item} />;
+      })}
+    </ListWrapper>
+  );
+};
+
+const CollectionItem = ({ children, style, ...props }) => {
+  return (
+    <ItemWrapper w={[1, 2 / 3, 1 / 2]} bg="white" m={1} p={3}>
+      <Link to={{ pathname: `/admin/c/${props.item.id}` }}>
+        {props.item.title}
+      </Link>
+    </ItemWrapper>
+  );
+};
+
 class AdminCollections extends Component {
+  componentWillMount() {
+    this.props.getCollections(this.props.auth.authToken);
+  }
+  componentDidMount() {
+    console.log("AdminCollections/componentDidMount:PROPS", this.props);
+  }
   render() {
     return (
-      <Container style={{ height: "calc(100vh - 70px)" }}>
-        <Flex mx={-2}>
-          <Box w={1} px={2}>
-            <Disclaimer is="h1" color="white">
-              WORK IN PROGRESS...
-            </Disclaimer>
-          </Box>
-        </Flex>
-        <Flex>
-          <Box w={1} px={2}>
-            <BackLink
-              to="/admin"
-              width={[1, 1 / 2, 1 / 3]}
-              m={2}
-              color="white"
-              bg="grey"
-              p={3}
-              borderRadius={1}
-            >
-              Retour à l'accueil admin
-            </BackLink>
-          </Box>
-        </Flex>
+      <Container>
+        <HeaderSearchBox>Searchbox</HeaderSearchBox>
+        <CollectionsList items={this.props.collections} />
       </Container>
     );
   }
 }
 
-export default AdminCollections;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  routing: state.routing,
+  loadingCollections: state.adminCollections.allCollections.loading,
+  collections: state.adminCollections.allCollections.collections,
+  errorMessage: state.adminCollections.allCollections.error
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ getCollections }, dispatch);
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(AdminCollections)
+);
